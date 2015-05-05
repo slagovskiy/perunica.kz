@@ -1,3 +1,4 @@
+/*
 function _InitManager()
 {
   this.execute_events = function(name)
@@ -1185,3 +1186,93 @@ function _Confirm() {
     });
   }
 }
+
+*/
+
+function uban_move(dx)
+{
+	var bn=$(".uban");  
+	if (bn.data("moving")==1)
+		return;
+	bn.data("moving",1);
+	var cur=parseInt(bn.data("cur"),10);
+	var max=bn.children().length-1;
+	var next=cur+dx;
+	if (next<0)
+		next=max;
+	if (next>max)
+		next=0;
+	bn.data("cur",next);
+	bn.children().eq(cur).addClass("up").show();
+	bn.children().eq(next).addClass("down").show();
+	bn.children().eq(cur).fadeOut(function() {
+		bn.children().eq(cur).removeClass("up").hide();
+		bn.children().eq(next).removeClass("down");
+		bn.data("moving",0);
+	});
+}
+
+function uban_auto()
+{
+	var bn=$(".uban");  
+	if (bn.data("auto")==0)
+		return;
+	uban_move(1);
+	setTimeout("uban_auto()",4000);
+}
+
+$(window.document).ready(function() {
+	$(".items[data-show='1'] .item").each(function() {
+		var info=$(this).find(".info");
+		if (info.data("ch")!="")
+		{
+			info.data("th",info.find(".title").outerHeight());
+			info.data("dh",info.find(".descr").outerHeight());			
+		}
+		$(this).mouseenter(function() {
+			var ch=info.data("th");
+			var h=info.data("dh");
+			info.clearQueue();
+			info.animate({height:ch+h},{step:function(now,fx) {
+				info.css("marginTop",222-now+ch);      
+			},duration:250});			
+		}).mouseleave(function() {
+			var ch=info.data("th");
+			info.clearQueue();
+			info.animate({height:ch},{step:function(now,fx) {
+				info.css("marginTop",222-now+ch);      
+			},duration:250,complete:function() {				
+			}});
+		});
+	});
+});
+
+$(window).load(function() {
+	var bn=$(".uban");
+	var nav=$(".uban_nav");  
+	var h=bn.children().eq(0).height();
+	bn.height(h);
+	nav.children().height(h);  
+	if (bn.children().length>1)
+	{
+		bn.children().addClass("ready");
+		nav.show();
+		bn.data("cur",0);
+		bn.data("moving",0);
+		bn.data("auto",1);
+		nav.children(".next").click(function() {
+			bn.data("auto",0);
+			uban_move(1);
+		});
+		nav.children(".prev").click(function() {
+			bn.data("auto",0);
+			uban_move(-1);
+		});
+		setTimeout("uban_auto()",4000);
+	}  
+});
+
+$(document).ready(function() {
+});
+
+

@@ -495,17 +495,16 @@ a.logo {
   padding-bottom:5px;
 }
 .chwin .info {
-  box-sizing:border-box;
+	box-sizing:border-box;
 	padding:25px;
-  padding-top:19px;
-  padding-bottom:9px;
+	padding-top:19px;
+	padding-bottom:9px;
 	background:#ffffff;
 	-webkit-border-radius: 0px 0px 10px 10px;
 	-moz-border-radius: 0px 0px 10px 10px;
 	border-radius: 0px 0px 10px 10px;
-	behavior: url('/js/PIE.htc');
-  text-align:center;
-  width:580px;
+	text-align:center;
+	width:580px;
 }
 .chwin .item {
 	display:inline-block;
@@ -513,14 +512,14 @@ a.logo {
 	width:160px;
 	margin-bottom:10px;
 	cursor:pointer;
-  vertical-align:top;
+	vertical-align:top;
 /* 	padding:10px; */
 }
 .chwin .item:nth-child(3n) {
-  margin-right:0;
+	margin-right:0;
 }
 .chwin .item:last-of-type {
-  margin-right:0;
+	margin-right:0;
 }
 .chwin .item:hover {	
 	-moz-box-shadow:1px 1px 5px rgba(0,0,0,0.5);
