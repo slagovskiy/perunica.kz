@@ -1188,7 +1188,7 @@ function _Confirm() {
 }
 
 */
-
+/*
 function uban_move(dx)
 {
 	var bn=$(".uban");  
@@ -1220,7 +1220,7 @@ function uban_auto()
 	uban_move(1);
 	setTimeout("uban_auto()",4000);
 }
-
+*/
 $(window.document).ready(function() {
 	$(".items[data-show='1'] .item").each(function() {
 		var info=$(this).find(".info");
@@ -1247,6 +1247,8 @@ $(window.document).ready(function() {
 	});
 });
 
+
+/*
 $(window).load(function() {
 	var bn=$(".uban");
 	var nav=$(".uban_nav");  
@@ -1271,8 +1273,6 @@ $(window).load(function() {
 		setTimeout("uban_auto()",4000);
 	}  
 });
-
-$(document).ready(function() {
-});
+*/
 
 

@@ -4,10 +4,13 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="description" content="">
 		<meta name="keywords" content="Доставка №1 Мурманск телефон (8152) 777-777">
-		<link rel="STYLESHEET" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/slicebox.css" />
 		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/cart.js"></script>
+        <script type="text/javascript" src="js/modernizr.custom.46884.js"></script>
+        <script type="text/javascript" src="js/jquery.slicebox.js"></script>
 	</head>
 <body>
 <div class="main_wrap">
@@ -37,6 +40,7 @@
 <a class="prev" style="height: 200px;"></a>
 <a class="next" style="height: 200px;"></a>
 </div>
+<!--
 <div class="uban" style="height: 200px;">
 	<div class="ready" style="display: block;">
     	<img src="img/baner1.jpg" alt="" style="border:0;">
@@ -57,7 +61,25 @@
         </a>
     </div>
 </div>
-
+-->
+<div>
+    <ul id="sb-slider" class="sb-slider">
+        <li>
+            <a href="http://www.flickr.com/photos/strupler/2969141180" target="_blank"><img src="img/baner1.jpg" alt="image1"/></a>
+        </li>
+        <li>
+            <a href="http://www.flickr.com/photos/strupler/2968268187" target="_blank"><img src="img/baner2.jpg" alt="image2"/></a>
+        </li>
+        <li>
+            <a href="http://www.flickr.com/photos/strupler/2968114825" target="_blank"><img src="img/baner3.jpg" alt="image1"/></a>
+        </li>
+        <li>
+            <a href="http://www.flickr.com/photos/strupler/2968122059" target="_blank"><img src="img/baner4.jpg" alt="image1"/></a>
+        </li>
+    </ul>
+    
+    <div id="shadow" class="shadow"></div>
+</div>
 <div class="clear"></div>
 
 
@@ -196,6 +218,62 @@
     	<a href="http://lagovskiy.com" target="_blank">создание сайта - <b><font color="red">S</font>ERGEY<font color="red">L</font>AGOVSKIY</a></b>
     </div>
 </div>
+<script type="text/javascript">
+	$(function() {
+		
+		var Page = (function() {
+			var $navArrows = $( '#nav-arrows' ).hide(),
+				$shadow = $( '#shadow' ).hide(),
+				slicebox = $( '#sb-slider' ).slicebox( {
+					onReady : function() {
+
+						$navArrows.show();
+						$shadow.show();
+
+					},
+					autoplay : true,
+					interval: 5000,
+					cuboidsCount : 5,
+					maxCuboidsCount : 7,
+					orientation : 'r',
+					cuboidsRandom : true,
+					disperseFactor : 30
+				} ),
+				
+				init = function() {
+
+					initEvents();
+					
+				},
+				initEvents = function() {
+
+					// add navigation events
+					$navArrows.children( ':first' ).on( 'click', function() {
+
+						slicebox.next();
+						return false;
+
+					} );
+
+					$navArrows.children( ':last' ).on( 'click', function() {
+						
+						slicebox.previous();
+						return false;
+
+					} );
+
+				};
+				
+
+
+				return { init : init };
+
+		})();
+
+		Page.init();
+
+	});
+</script>
 
 </body>
 </html>
