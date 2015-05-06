@@ -25,7 +25,7 @@ class UnitAdmin(admin.ModelAdmin):
 
 class GoodsAdmin(admin.ModelAdmin):
     ordering = ['menu', 'is_sticked', 'is_new', 'name']
-    list_display = ['name', 'menu', 'price', 'is_sticked', 'is_new', 'deleted']
+    list_display = ['name', 'menu', 'price', 'is_sticked', 'is_new', 'is_on_first', 'deleted']
     list_filter = ['name']
     search_fields = ['name']
 
