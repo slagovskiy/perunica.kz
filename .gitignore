@@ -36,3 +36,4 @@ projectFilesBackup
 # Media #
 #########
 media/*
+www/media/*
