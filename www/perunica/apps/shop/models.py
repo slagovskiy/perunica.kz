@@ -38,13 +38,26 @@ class SubMenu(models.Model):
         verbose_name_plural = u'Sub menu'
 
 
+class Unit(models.Model):
+    deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
+    name = models.CharField(max_length=255, verbose_name='Name')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = u'Unit'
+        verbose_name_plural = u'Units'
+
+
 class Goods(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     name = models.CharField(max_length=255, verbose_name='Name')
     image = models.ImageField(upload_to='goods', null=True, verbose_name=u'Image')
     description = models.TextField(max_length=1024, verbose_name=u'Description')
     weight = models.IntegerField(default=0, verbose_name=u'Weight')
-    unit = models.CharField(max_length=10, default=u'гр.', verbose_name=u'Unit')
+    unit = models.ForeignKey(Unit)
     price = models.FloatField(default=0, verbose_name=u'Price')
     menu = models.ForeignKey(Menu)
     sub_menu = models.ForeignKey(SubMenu, null=True)
