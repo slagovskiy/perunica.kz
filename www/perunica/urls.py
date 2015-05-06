@@ -3,7 +3,7 @@ from django.contrib import admin
 from perunica.settings import MEDIA_ROOT
 
 
-admin.site.site_header = 'Perunica administration'
+admin.site.site_header = 'ПЕРУНИЦА - Администрирование'
 
 urlpatterns = [
     url(r'^$', 'perunica.views.index', name='home'),
