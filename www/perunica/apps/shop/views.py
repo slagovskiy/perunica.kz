@@ -8,7 +8,14 @@ log = logging.getLogger(__name__)
 
 
 def index(request):
-    context = {}
+    try:
+        goods = Goods.objects.all().filter(is_on_first=True)
+        context = {
+            'goods': goods
+        }
+    except:
+        context = {}
+        log.error('Error get_index')
     return render(request, 'shop/index.html', context)
 
 
@@ -23,7 +30,7 @@ def get_menu(request, menu_slug):
     except:
         context = {}
         log.error('Error get_menu')
-    return render(request, 'shop/index.html', context)
+    return render(request, 'shop/menu.html', context)
 
 
 def get_sub_menu(request, menu_slug, sub_menu_slug):
@@ -37,4 +44,4 @@ def get_sub_menu(request, menu_slug, sub_menu_slug):
     except:
         context = {}
         log.error('Error get_menu')
-    return render(request, 'shop/index.html', context)
+    return render(request, 'shop/menu.html', context)

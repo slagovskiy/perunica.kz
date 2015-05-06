@@ -1,6 +1,5 @@
 {% if sub_menu %}
         <div class="rsection">
-
             <div class="smenu">
                 {% for item in sub_menu %}
                     <a id="sub_menu_{{ item.slug }}" href="{{ item.get_absolute_url }}">{{ item.name }}</a>
@@ -10,10 +9,7 @@
                 {% endfor %}
                 <div class="clear"></div>
             </div>
-
-            {% block content %}
-            {% endblock %}
         </div>
 {% else %}
-    <div class="rsection_m"></div>
+    <div class="rsection_m">&nbsp;</div>
 {% endif %}

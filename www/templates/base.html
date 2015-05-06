@@ -102,6 +102,8 @@
 
         {% if menu %}
             {% widget_sub_menu menu %}
+        {% else %}
+            <div class="rsection_m">&nbsp;</div>
         {% endif %}
 
         {% block content %}
