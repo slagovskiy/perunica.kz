@@ -366,6 +366,10 @@ a.logo {
 	color:#de1450;	
 }
 /* items */
+.items {
+    padding-left: 265px;
+}
+
 .items .item {
 	width:242px;
 	float:left;

@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>Hello, world!</div>{{ sub_menu.slug }}
+    {% if goods %}
+        <div class="items" data-show="1">
+        {% for item in goods %}
+        <div class="item" id="goods_{{ item.id }}">
+            <img src="{{ item.image.url }}">
+            <div class="info" style="margin-top: 222px; height: 40px; overflow: hidden;">
+                <div class="title">{{ item.name }}</div>
+                <div class="descr">{{ item.description }} {{ item.weight }}{{ item.unit.name }}</div>
+            </div>
+            <div class="price">{{ item.price }} тнг.</div>
+            <div class="order">
+                <button class="butt" onclick="cart_add_good(this)">заказать</button>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block bottom_script %}

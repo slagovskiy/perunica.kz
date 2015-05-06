@@ -1,6 +1,6 @@
 import logging
 from django.shortcuts import render
-from perunica.apps.shop.models import Menu, SubMenu
+from perunica.apps.shop.models import Menu, SubMenu, Goods
 from django.http import HttpResponse
 
 
@@ -15,8 +15,10 @@ def index(request):
 def get_menu(request, menu_slug):
     try:
         menu = Menu.objects.all().filter(slug=menu_slug)[0]
+        goods = Goods.objects.all().filter(menu=menu)
         context = {
-            'menu': menu
+            'menu': menu,
+            'goods': goods
         }
     except:
         context = {}
