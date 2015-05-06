@@ -3,7 +3,7 @@ from .models import Menu
 
 
 class MenuAdmin(admin.ModelAdmin):
-    fields = ['sort', 'slug', 'name', 'deleted']
+    #fields = ['sort', 'slug', 'name', 'deleted']
     ordering = ['sort', 'name']
     list_display = ['slug', 'name', 'sort', 'deleted']
     list_filter = ['slug']
