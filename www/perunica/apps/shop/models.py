@@ -5,6 +5,7 @@ class Menu(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     name = models.TextField(max_length=255, verbose_name=u'Name')
     sort = models.IntegerField(default=10, verbose_name=u'Sort')
+    icon = models.ImageField(upload_to='menu_icons', null=True, verbose_name=u'Icon')
 
     def __str__(self):
         return '[%s] %s' % (self.sort, self.name)
