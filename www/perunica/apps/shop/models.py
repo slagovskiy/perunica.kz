@@ -12,7 +12,7 @@ class Menu(models.Model):
         return '[%s] %s' % (self.sort, self.name)
 
     def get_absolute_url(self):
-        return '/menu/%s/' % self.slug
+        return '/shop/menu/%s/' % self.slug
 
     class Meta:
         ordering = ['sort', 'name']
@@ -30,7 +30,7 @@ class SubMenu(models.Model):
         return '[%s] %s' % (self.menu.name, self.name)
 
     def get_absolute_url(self):
-        return '/menu/%s/%s/' % (self.menu.slug, self.slug)
+        return '/shop/menu/%s/%s/' % (self.menu.slug, self.slug)
 
     class Meta:
         ordering = ['name']
