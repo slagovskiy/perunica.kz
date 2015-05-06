@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Menu, SubMenu
+from .models import Menu, SubMenu, Unit, Goods
 
 
 class MenuAdmin(admin.ModelAdmin):
@@ -16,5 +16,12 @@ class SubMenuAdmin(admin.ModelAdmin):
     search_fields = ['slug']
 
 
+class UnitAdmin(admin.ModelAdmin):
+    ordering = ['name']
+    list_display = ['name', 'deleted']
+    list_filter = ['name']
+    search_fields = ['name']
+
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(SubMenu, SubMenuAdmin)
+admin.site.register(Unit, UnitAdmin)
