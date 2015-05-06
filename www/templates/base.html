@@ -100,22 +100,9 @@
 
         {% widget_main_menu %}
 
-        <div class="rsection">
-
-            <div class="smenu">
-                <a href="#" class="sel">все</a>
-                <span>|</span>
-                <a href="#">под раздел 1</a>
-                <span>|</span>
-                <a href="#">под раздел 2</a>
-                <span>|</span>
-                <a href="#">под раздел 3</a>
-                <div class="clear"></div>
-            </div>
-
-            {% block content %}
-            {% endblock %}
-        </div>
+        {% if menu %}
+            {% widget_sub_menu menu %}
+        {% endif %}
 
         <div class="clear"></div>
         </div>

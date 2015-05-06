@@ -1,0 +1,19 @@
+{% if sub_menu %}
+        <div class="rsection">
+
+            <div class="smenu">
+                <a href="#" class="sel">все</a>
+                <span>|</span>
+                {% for menu in sub_menu %}
+                    <a href="{{ menu.get_absolute_url }}">{{ menu.name }}</a>
+                    {% if not forloop.last %}
+                        <span>|</span>
+                    {% endif %}
+                {% endfor %}
+                <div class="clear"></div>
+            </div>
+
+            {% block content %}
+            {% endblock %}
+        </div>
+{% endif %}
