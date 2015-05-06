@@ -60,7 +60,7 @@ class Goods(models.Model):
     unit = models.ForeignKey(Unit)
     price = models.FloatField(default=0, verbose_name=u'Price')
     menu = models.ForeignKey(Menu)
-    sub_menu = models.ForeignKey(SubMenu, null=True)
+    sub_menu = models.ForeignKey(SubMenu, null=True, blank=True)
     is_new = models.BooleanField(default=False, verbose_name=u'New')
     is_sticked = models.BooleanField(default=False, verbose_name=u'Sticked on top')
     is_on_first = models.BooleanField(default=False, verbose_name=u'On first')
