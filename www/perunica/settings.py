@@ -12,6 +12,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'perunica.utils',
     'perunica.apps.shop',
 )
 
