@@ -12,6 +12,3 @@ def widget_main_menu():
     except:
         log.exception('Error get main menu')
     return {'main_menu': main_menu}
-
-
-#register.inclusion_tag('widgets/main_menu.html')(widget_main_menu)
