@@ -1,0 +1,170 @@
+{% load static %}
+<html>
+	<head>
+    	<title>{{ meta_title }}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="description" content="{{ meta_description }}">
+		<meta name="keywords" content="{{ meta_keywords }}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/slicebox.css' %}" />
+		<script type="text/javascript" src="{%static 'js/jquery-1.7.1.min.js' %}"></script>
+		<script type="text/javascript" src="{%static 'js/main.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/modernizr.custom.46884.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.slicebox.js' %}"></script>
+	</head>
+    <body>
+        <div class="main_wrap">
+        <div class="main">
+        <table class="header">
+            <tr>
+                <td class="headerl"></td>
+                <td class="headerr">
+                    <div class="cart_info cart_info_ex">
+                        <div class="title">Мой заказ</div>
+                        <div class="price"><span>500</span> тнг.</div>
+                        <button class="butt" type="button" onclick="location.href='#'">Оформить</button>
+                        </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="headerm">
+                    <div class="emenu">
+                        <a href="#">Акции</a>
+                        <a href="#">Условия доставки</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="uban_nav" style="display: block;">
+        <a class="prev" style="height: 200px;"></a>
+        <a class="next" style="height: 200px;"></a>
+        </div>
+        <div>
+            <ul id="sb-slider" class="sb-slider">
+                <li>
+                    <a href="#" target="_blank"><img src="{% static 'img/baner1.jpg' %}" alt="image1"/></a>
+                </li>
+                <li>
+                    <a href="#" target="_blank"><img src="{% static 'img/baner2.jpg %}" alt="image2"/></a>
+                </li>
+                <li>
+                    <a href="#" target="_blank"><img src="{% static 'img/baner3.jpg' %}" alt="image1"/></a>
+                </li>
+                <li>
+                    <a href="#" target="_blank"><img src="{% static 'img/baner4.jpg' %}" alt="image1"/></a>
+                </li>
+            </ul>
+                <script type="text/javascript">
+                $(function() {
+                    var Page = (function() {
+                        var $navArrows = $( '#nav-arrows' ).hide(),
+                            $shadow = $( '#shadow' ).hide(),
+                            slicebox = $( '#sb-slider' ).slicebox( {
+                                onReady : function() {
+                                    $navArrows.show();
+                                    $shadow.show();
+                                },
+                                autoplay : true,
+                                interval: 5000,
+                                cuboidsCount : 5,
+                                maxCuboidsCount : 7,
+                                orientation : 'r',
+                                cuboidsRandom : true,
+                                disperseFactor : 30
+                            } ),
+                            init = function() {
+                                initEvents();
+                            },
+                            initEvents = function() {
+                                $navArrows.children( ':first' ).on( 'click', function() {
+                                    slicebox.next();
+                                    return false;
+                                } );
+                                $navArrows.children( ':last' ).on( 'click', function() {
+                                    slicebox.previous();
+                                    return false;
+                                } );
+                            };
+                            return { init : init };
+                    })();
+                    Page.init();
+                });
+            </script>
+            <div id="shadow" class="shadow"></div>
+        </div>
+        <div class="clear"></div>
+
+
+        <div class="lsection">
+            <div class="menu">
+                <div style="background:url('{% static 'img/i_beaf.png' %}') no-repeat;">
+                    <span>
+                        <a href="#" class="sel">Мясо</a>
+                    </span>
+                </div>
+                <div style="background:url('{% static 'img/i_fish.png' %}') no-repeat;">
+                    <span>
+                        <a href="#">Рыба</a>
+                    </span>
+                </div>
+                <div style="background:url('{% static 'img/i_soup.png' %}') no-repeat;">
+                    <span>
+                        <a href="#">Супы</a>
+                    </span>
+                </div>
+                <div style="background:url('{% static 'img/i_garnir.png' %}') no-repeat;">
+                    <span>
+                        <a href="#">Гарниры</a>
+                    </span>
+                </div>
+                <div style="background:url('{% static 'img/i_salat.png' %}') no-repeat;">
+                    <span>
+                        <a href="#">Салаты</a>
+                    </span>
+                </div>
+                <div style="background:url('{% static 'img/i_sous.png' %}') no-repeat;">
+                    <span>
+                        <a href="#">Соусы</a>
+                    </span>
+                </div>
+                <div style="background:url('{% static 'img/i_desert.png' %}') no-repeat;">
+                    <span>
+                        <a href="#">Десерты</a>
+                    </span>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="rsection">
+
+            <div class="smenu">
+                <a href="#" class="sel">все</a>
+                <span>|</span>
+                <a href="#">под раздел 1</a>
+                <span>|</span>
+                <a href="#">под раздел 2</a>
+                <span>|</span>
+                <a href="#">под раздел 3</a>
+                <div class="clear"></div>
+            </div>
+
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <div class="clear"></div>
+        </div>
+
+        </div>
+        <div class="footer">
+            <div class="copy">© 2015 ПЕРУНИЦА</div>
+            <div class="phone">Общая информация по телефону: (8152) 75-00-05</div>
+            <div class="author">
+                <a href="http://lagovskiy.com" target="_blank">создание сайта - <b><span style="color: red;">S</span>ERGEY<span style="color: red;">L</span>AGOVSKIY</b></a>
+            </div>
+        </div>
+    </body>
+</html>
