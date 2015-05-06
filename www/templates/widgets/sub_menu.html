@@ -2,10 +2,8 @@
         <div class="rsection">
 
             <div class="smenu">
-                <a href="{{ menu.menu.get_absolute_url }}"{% if not smenu %} class="sel"{% endif %}>все</a>
-                <span>|</span>
-                {% for menu in sub_menu %}
-                    <a href="{{ menu.get_absolute_url }}">{{ menu.name }}</a>
+                {% for item in sub_menu %}
+                    <a id="sub_menu_{{ item.slug }}" href="{{ item.get_absolute_url }}">{{ item.name }}</a>
                     {% if not forloop.last %}
                         <span>|</span>
                     {% endif %}

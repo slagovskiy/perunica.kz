@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>Hello, world!</div>
+<div>Hello, world!</div>{{ sub_menu.slug }}
 {% endblock %}
 
 {% block bottom_script %}
     {% if menu %}
         $('#main_menu_{{ menu.slug }}').addClass('sel');
+        {% if sub_menu %}
+            $('#sub_menu_{{ sub_menu.slug }}').addClass('sel');
+        {% endif %}
     {% endif %}
 {% endblock %}
