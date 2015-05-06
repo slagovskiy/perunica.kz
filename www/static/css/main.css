@@ -311,6 +311,13 @@ a.logo {
 	padding-top:25px;
 	padding-bottom:50px;
 }
+.rsection_m {
+	width:752px;
+	float:right;
+	margin-right:15px;
+	padding-top:25px;
+	padding-bottom:0px;
+}
 .lsection .menu {
 	padding-left:10px;
 }

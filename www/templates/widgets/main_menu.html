@@ -1,9 +1,9 @@
         <div class="lsection">
             <div class="menu">
-                {% for menu in main_menu %}
-                <div style="background:url('{{ menu.icon.url }}') no-repeat;">
+                {% for item in main_menu %}
+                <div style="background:url('{{ item.icon.url }}') no-repeat;">
                     <span>
-                        <a href="{{ menu.get_absolute_url }}">{{ menu.name }}</a>
+                        <a id="main_menu_{{ item.slug }}" href="{{ item.get_absolute_url }}">{{ item.name }}</a>
                     </span>
                 </div>
                 {% endfor %}
