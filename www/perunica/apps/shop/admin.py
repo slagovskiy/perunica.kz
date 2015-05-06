@@ -22,6 +22,15 @@ class UnitAdmin(admin.ModelAdmin):
     list_filter = ['name']
     search_fields = ['name']
 
+
+class GoodsAdmin(admin.ModelAdmin):
+    ordering = ['menu', 'is_sticked', 'is_new', 'name']
+    list_display = ['name', 'menu', 'price', 'is_sticked', 'is_new', 'deleted']
+    list_filter = ['name']
+    search_fields = ['name']
+
+
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(SubMenu, SubMenuAdmin)
 admin.site.register(Unit, UnitAdmin)
+admin.site.register(Goods, GoodsAdmin)
