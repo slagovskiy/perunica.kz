@@ -14,6 +14,17 @@ class Menu(models.Model):
     def get_absolute_url(self):
         return '/shop/menu/%s/' % self.slug
 
+    def admin_image_list(self):
+        return '<img style="width: 24px; height: 24px;" src="%s"/>' % self.icon.url
+
+    def admin_image(self):
+        return '<img src="%s"/>' % self.icon.url
+
+    admin_image_list.allow_tags = True
+    admin_image_list.short_description = u'Icon'
+    admin_image.allow_tags = True
+    admin_image.short_description = u'Icon'
+
     class Meta:
         ordering = ['sort', 'name']
         verbose_name = u'Menu'
@@ -70,6 +81,17 @@ class Goods(models.Model):
 
     def get_absolute_url(self):
         return '/shop/item/%s/' % self.id
+
+    def admin_image_list(self):
+        return '<img style="width: 24px; height: 24px;" src="%s"/>' % self.image.url
+
+    def admin_image(self):
+        return '<img src="%s"/>' % self.image.url
+
+    admin_image_list.allow_tags = True
+    admin_image_list.short_description = u'Image'
+    admin_image.allow_tags = True
+    admin_image.short_description = u'Image'
 
     class Meta:
         ordering = ['menu', 'is_sticked', 'is_new', 'name']
