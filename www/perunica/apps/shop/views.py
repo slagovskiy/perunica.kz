@@ -1,6 +1,6 @@
 import logging
 from django.shortcuts import render
-from perunica.apps.shop.models import Menu, SubMenu, Goods
+from perunica.apps.shop.models import Menu, SubMenu, Goods, GoodsGroup, GoodsLinkGroup
 from django.http import HttpResponse
 
 
@@ -116,3 +116,16 @@ def basket_clear(request):
         context = {}
         log.error('Error basket_clear')
         return HttpResponse('error')
+
+
+def get_choice(request, id):
+    try:
+        goods = Goods.objects.all().get(id=id)
+        choice = GoodsLinkGroup.objects.filter(group=goods.choice)[0].goods.all()
+        context = {
+            'choice': choice
+        }
+    except:
+        context = {}
+        log.error('Error get_choice')
+    return render(request, 'shop/choice.html', context)

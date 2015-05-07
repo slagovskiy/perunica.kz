@@ -16,20 +16,17 @@ function cart_add_choice(id){
         url: '/shop/choice/'+id+'/',
         cache: false,
         success: function(data){
-            if(data=='ok')
-            {
-                $( "#dialog-choice" ).html(data);
-                $(function() {
-                    $( "#dialog-choice" ).dialog({
-                        resizable: false,
-                        height:440,
-                        width: 600,
-                        modal: true,
-                        closeOnEscape: false,
-                        title: "Уточните выбор"
-                    });
+            $( "#dialog-choice" ).html(data);
+            $(function() {
+                $( "#dialog-choice" ).dialog({
+                    resizable: false,
+                    height:440,
+                    width: 600,
+                    modal: true,
+                    closeOnEscape: false,
+                    title: "Уточните выбор"
                 });
-            }
+            });
         },
         error: function(e, xhr){
             msg_error("", "Ошибка загрузки данных.");
