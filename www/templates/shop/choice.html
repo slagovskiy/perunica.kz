@@ -1,0 +1,10 @@
+    <div class="chwin">
+        <div class="info">
+            {% for item in choice %}
+            <div class="item">
+                <img src="{{ item.image.url }}">
+                <span>{{ item.name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
