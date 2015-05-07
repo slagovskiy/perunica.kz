@@ -1,17 +1,5 @@
 from django.db import models
-import uuid
-import os
-
-
-def path_and_rename(path):
-    def wrapper(instance, filename):
-        ext = filename.split('.')[-1]
-        if instance.pk:
-            filename = '{}.{}'.format(instance.pk, ext)
-        else:
-            filename = '{}.{}'.format(str(uuid.uuid1()), ext)
-        return os.path.join(path, filename)
-    return wrapper
+from perunica.utils.fs import path_and_rename
 
 
 class Menu(models.Model):
@@ -19,7 +7,7 @@ class Menu(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     name = models.CharField(max_length=255, verbose_name=u'Name')
     sort = models.IntegerField(default=10, verbose_name=u'Sort')
-    icon = models.ImageField(upload_to=path_and_rename('menu_icons'), null=True, verbose_name=u'Icon')
+    icon = models.ImageField(upload_to='menu_icons', null=True, verbose_name=u'Icon')
 
     def __str__(self):
         return '[%s] %s' % (self.sort, self.name)
@@ -75,10 +63,23 @@ class Unit(models.Model):
         verbose_name_plural = u'Units'
 
 
+class GoodsGroup(models.Model):
+    deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
+    name = models.CharField(max_length=255, verbose_name=u'Name')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = u'Goods group'
+        verbose_name_plural = u'Goods groups'
+
+
 class Goods(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     name = models.CharField(max_length=255, verbose_name='Name')
-    image = models.ImageField(upload_to=path_and_rename('goods'), null=True, verbose_name=u'Image')
+    image = models.ImageField(upload_to='goods', null=True, verbose_name=u'Image')
     description = models.TextField(max_length=1024, verbose_name=u'Description')
     weight = models.IntegerField(default=0, verbose_name=u'Weight')
     unit = models.ForeignKey(Unit)
@@ -88,6 +89,10 @@ class Goods(models.Model):
     is_new = models.BooleanField(default=False, verbose_name=u'New')
     is_sticked = models.BooleanField(default=False, verbose_name=u'Sticked on top')
     is_on_first = models.BooleanField(default=False, verbose_name=u'On first')
+    choice = models.ForeignKey(GoodsGroup, null=True, blank=True, verbose_name=u'Choice')
+    option1 = models.ForeignKey(GoodsGroup, null=True, related_name='o1', blank=True, verbose_name=u'Option 1')
+    option2 = models.ForeignKey(GoodsGroup, null=True, related_name='o2', blank=True, verbose_name=u'Option 2')
+    option3 = models.ForeignKey(GoodsGroup, null=True, related_name='o3', blank=True, verbose_name=u'Option 3')
 
     def __str__(self):
         return '[%s] %s' % (self.menu.name, self.name)
@@ -112,15 +117,6 @@ class Goods(models.Model):
         verbose_name_plural = u'Goods'
 
 
-class GoodsGroup(models.Model):
-    deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
-    name = models.CharField(max_length=255, verbose_name=u'Name')
+class GoodsLinkGroup(models.Model):
+    group = models.OneToOneField(GoodsGroup)
     goods = models.ManyToManyField(Goods)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ['name']
-        verbose_name = u'Goods group'
-        verbose_name_plural = u'Goods groups'

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.forms import SelectMultiple
 from django.db import models
-from .models import Menu, SubMenu, Unit, Goods, GoodsGroup
+from .models import Menu, SubMenu, Unit, Goods, GoodsGroup, GoodsLinkGroup
 
 
 class MenuAdmin(admin.ModelAdmin):
@@ -34,16 +34,23 @@ class GoodsAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
-class GoodsGroupAdmin(admin.ModelAdmin):
-    ordering = ['name']
-    list_display = ['name', 'deleted']
-    list_filter = ['name']
-    search_fields = ['name']
+class GoodsLinkInLine(admin.StackedInline):
+    model = GoodsLinkGroup
     formfield_overrides = {
         models.ManyToManyField: {
             'widget': SelectMultiple(attrs={'size':'14'})
         },
         }
+
+
+class GoodsGroupAdmin(admin.ModelAdmin):
+    ordering = ['name']
+    list_display = ['name', 'deleted']
+    list_filter = ['name']
+    search_fields = ['name']
+    inlines = [
+        GoodsLinkInLine,
+    ]
 
 
 admin.site.register(Menu, MenuAdmin)
