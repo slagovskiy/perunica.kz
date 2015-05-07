@@ -34,6 +34,11 @@ function cart_add_choice(id){
     });
 }
 
+function cart_select_choice(id){
+    $( "#dialog-choice" ).dialog( "close" );
+    cart_add_good(id);
+}
+
 function cart_add_good(id){
     $.ajax({
         url: '/shop/basket/add/'+id+'/',

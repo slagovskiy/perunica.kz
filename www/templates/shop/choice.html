@@ -1,7 +1,7 @@
     <div class="chwin">
         <div class="info">
             {% for item in choice %}
-            <div class="item">
+            <div class="item" onclick="cart_select_choice({{ item.id }});">
                 <img src="{{ item.image.url }}">
                 <span>{{ item.name }}</span>
             </div>
