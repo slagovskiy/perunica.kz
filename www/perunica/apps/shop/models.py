@@ -1,5 +1,6 @@
 from django.db import models
-from perunica.utils.fs import path_and_rename
+import uuid
+import os
 
 
 class Menu(models.Model):
@@ -7,7 +8,15 @@ class Menu(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     name = models.CharField(max_length=255, verbose_name=u'Name')
     sort = models.IntegerField(default=10, verbose_name=u'Sort')
-    icon = models.ImageField(upload_to='menu_icons', null=True, verbose_name=u'Icon')
+
+    def upload_to(instance, filename):
+        ext = filename.split('.')[-1]
+        if instance.pk:
+            filename = '{}.{}'.format(instance.pk, ext)
+        else:
+            filename = '{}.{}'.format(str(uuid.uuid1()), ext)
+        return os.path.join('menu_icons', filename)
+    icon = models.ImageField(upload_to=upload_to, null=True, verbose_name=u'Icon')
 
     def __str__(self):
         return '[%s] %s' % (self.sort, self.name)
@@ -79,7 +88,6 @@ class GoodsGroup(models.Model):
 class Goods(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     name = models.CharField(max_length=255, verbose_name='Name')
-    image = models.ImageField(upload_to='goods', null=True, verbose_name=u'Image')
     description = models.TextField(max_length=1024, verbose_name=u'Description')
     weight = models.IntegerField(default=0, verbose_name=u'Weight')
     unit = models.ForeignKey(Unit)
@@ -93,6 +101,15 @@ class Goods(models.Model):
     option1 = models.ForeignKey(GoodsGroup, null=True, related_name='o1', blank=True, verbose_name=u'Option 1')
     option2 = models.ForeignKey(GoodsGroup, null=True, related_name='o2', blank=True, verbose_name=u'Option 2')
     option3 = models.ForeignKey(GoodsGroup, null=True, related_name='o3', blank=True, verbose_name=u'Option 3')
+
+    def upload_to(instance, filename):
+        ext = filename.split('.')[-1]
+        if instance.pk:
+            filename = '{}.{}'.format(instance.pk, ext)
+        else:
+            filename = '{}.{}'.format(str(uuid.uuid1()), ext)
+        return os.path.join('goods', filename)
+    image = models.ImageField(upload_to=upload_to, null=True, verbose_name=u'Image')
 
     def __str__(self):
         return '[%s] %s' % (self.menu.name, self.name)

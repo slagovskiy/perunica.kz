@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 def index(request):
     try:
-        goods = Goods.objects.all().filter(is_on_first=True)
+        goods = Goods.objects.all().filter(is_on_first=True, deleted=False)
         context = {
             'goods': goods
         }
@@ -22,7 +22,7 @@ def index(request):
 def get_menu(request, menu_slug):
     try:
         menu = Menu.objects.all().filter(slug=menu_slug)[0]
-        goods = Goods.objects.all().filter(menu=menu)
+        goods = Goods.objects.all().filter(menu=menu, deleted=False)
         context = {
             'menu': menu,
             'goods': goods
@@ -37,9 +37,11 @@ def get_sub_menu(request, menu_slug, sub_menu_slug):
     try:
         menu = Menu.objects.all().filter(slug=menu_slug)[0]
         sub_menu = SubMenu.objects.all().filter(slug=sub_menu_slug)[0]
+        goods = Goods.objects.all().filter(sub_menu=sub_menu, deleted=False)
         context = {
             'menu': menu,
-            'sub_menu': sub_menu
+            'sub_menu': sub_menu,
+            'goods': goods
         }
     except:
         context = {}
