@@ -1,6 +1,17 @@
 from django.db import models
 import uuid
+import os
 
+
+def path_and_rename(path):
+    def wrapper(instance, filename):
+        ext = filename.split('.')[-1]
+        if instance.pk:
+            filename = '{}.{}'.format(instance.pk, ext)
+        else:
+            filename = '{}.{}'.format(str(uuid.uuid1()), ext)
+        return os.path.join(path, filename)
+    return wrapper
 
 
 class Menu(models.Model):
@@ -8,7 +19,7 @@ class Menu(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     name = models.CharField(max_length=255, verbose_name=u'Name')
     sort = models.IntegerField(default=10, verbose_name=u'Sort')
-    icon = models.ImageField(upload_to='menu_icons', null=True, verbose_name=u'Icon')
+    icon = models.ImageField(upload_to=path_and_rename('menu_icons'), null=True, verbose_name=u'Icon')
 
     def __str__(self):
         return '[%s] %s' % (self.sort, self.name)
@@ -67,7 +78,7 @@ class Unit(models.Model):
 class Goods(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     name = models.CharField(max_length=255, verbose_name='Name')
-    image = models.ImageField(upload_to='goods', null=True, verbose_name=u'Image')
+    image = models.ImageField(upload_to=path_and_rename('goods'), null=True, verbose_name=u'Image')
     description = models.TextField(max_length=1024, verbose_name=u'Description')
     weight = models.IntegerField(default=0, verbose_name=u'Weight')
     unit = models.ForeignKey(Unit)
