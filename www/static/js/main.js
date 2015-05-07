@@ -16,14 +16,16 @@ function cart_add_choice(id){
         $( "#dialog-choice" ).dialog({
             //dialogClass: "no-close",
             resizable: false,
-            height:140,
+            height:440,
+            width: 600,
             modal: true,
-            title: "Уточните выбор",
-            buttons: {
-            "Закрыть": function() {
-                    $( this ).dialog( "close" );
-                }
-            }
+            closeOnEscape: false,
+            title: "Уточните выбор"
+            //buttons: {
+            //"Закрыть": function() {
+            //        $( this ).dialog( "close" );
+            //    }
+            //}
         });
     });
 }
