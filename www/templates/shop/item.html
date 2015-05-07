@@ -1,5 +1,6 @@
+{% load static %}
         <div class="item" id="goods_{{ item.id }}">
-            <img src="{{ item.image.url }}">
+            {% if item.image %}<img src="{{ item.image.url }}">{% else %}<img src="{% static 'img/no_image.jpg' %}">{% endif %}
             <div class="info" style="margin-top: 222px; height: 40px; overflow: hidden;">
                 <div class="title">{{ item.name }}</div>
                 <div class="descr">{{ item.description }} {{ item.weight }}{{ item.unit.name }}</div>

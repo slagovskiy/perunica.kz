@@ -25,10 +25,16 @@ class Menu(models.Model):
         return '/shop/menu/%s/' % self.slug
 
     def admin_image_list(self):
-        return '<img style="width: 24px; height: 24px;" src="%s"/>' % self.icon.url
+        if self.icon:
+            return '<img style="width: 24px; height: 24px;" src="%s"/>' % self.icon.url
+        else:
+            return ''
 
     def admin_image(self):
-        return '<img src="%s"/>' % self.icon.url
+        if self.icon:
+            return '<img src="%s"/>' % self.icon.url
+        else:
+            return ''
 
     admin_image_list.allow_tags = True
     admin_image_list.short_description = u'Icon'
@@ -118,10 +124,16 @@ class Goods(models.Model):
         return '/shop/item/%s/' % self.id
 
     def admin_image_list(self):
-        return '<img style="width: 24px; height: 24px;" src="%s"/>' % self.image.url
+        if self.image:
+            return '<img style="width: 24px; height: 24px;" src="%s"/>' % self.image.url
+        else:
+            return ''
 
     def admin_image(self):
-        return '<img src="%s"/>' % self.image.url
+        if self.image:
+            return '<img src="%s"/>' % self.image.url
+        else:
+            return ''
 
     admin_image_list.allow_tags = True
     admin_image_list.short_description = u'Image'
