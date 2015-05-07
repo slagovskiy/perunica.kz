@@ -88,6 +88,11 @@ def basket_add(request, id):
         tmp = request.session['basket']
         if not tmp:
             tmp = []
+        for item in tmp:
+            if goods.id == item['id']:
+                item['count'] = item['count'] + 1
+                request.session['basket'] = tmp
+                return HttpResponse('ok')
         tmp.append(
             {
                 'id': goods.id,
