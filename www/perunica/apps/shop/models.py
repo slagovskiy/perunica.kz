@@ -1,4 +1,6 @@
 from django.db import models
+import uuid
+
 
 
 class Menu(models.Model):
@@ -97,3 +99,17 @@ class Goods(models.Model):
         ordering = ['menu', 'is_sticked', 'is_new', 'name']
         verbose_name = u'Goods'
         verbose_name_plural = u'Goods'
+
+
+class GoodsGroup(models.Model):
+    deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
+    name = models.CharField(max_length=255, verbose_name=u'Name')
+    goods = models.ManyToManyField(Goods)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = u'Goods group'
+        verbose_name_plural = u'Goods groups'
