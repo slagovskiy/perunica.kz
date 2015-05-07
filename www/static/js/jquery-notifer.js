@@ -48,7 +48,7 @@
 					var box	= $("<div id=\"" + notice.id + "\"></div>");
 					/*box.append($("<div class=\"notifer_close\"></div>").append("x"));*/
 					box.append($("<h1></h1>").append(notice.ttl));
-					box.append($("<p></p>").append(notice.msg));
+					box.append($("<p style=\"font-size: 12px;\"></p>").append(notice.msg));
 					/*box.append($("<p></p>").addClass("time").append(Date()));*/
 					box.append($("<div></div>").addClass("bg"));
 					box.hide().fadeIn();
@@ -143,7 +143,7 @@ function msg_error(title, text)
         {
             ttl:title,
             msg:text,
-            skin:'red',
+            skin:'rounded,red',
             //skin:'rounded,red',
             duration:5000
         }
@@ -156,7 +156,7 @@ function msg_info(title, text)
         {
             ttl:title,
             msg:text,
-            skin:'',
+            skin:'rounded',
             //skin:'rounded,red',
             duration:5000
         }
