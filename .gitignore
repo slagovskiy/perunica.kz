@@ -4,6 +4,7 @@
 *.pot
 *~
 ~$*
+/tmp/*
 __pycache__
 
 # Project specific #
