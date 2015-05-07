@@ -11,12 +11,12 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/slicebox.css' %}" />
 		<script type="text/javascript" src="{%static 'js/jquery-1.7.1.min.js' %}"></script>
 		<script type="text/javascript" src="{%static 'js/main.js' %}"></script>
-		<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/modernizr.custom.46884.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/jquery.slicebox.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/jquery-notifer.js' %}"></script>
 	</head>
     <body>
+    {{ request.session.basket }}
         <div class="main_wrap">
         <div class="main">
         <table class="header">

@@ -78,5 +78,26 @@ def get_basket(request):
         }
     except:
         context = {}
-        log.error('Error get_menu')
+        log.error('Error get_basket')
     return render(request, 'shop/basket.html', context)
+
+
+def basket_add(request, id):
+    try:
+        goods = Goods.objects.all().filter(id=id)[0]
+        tmp = request.session['basket']
+        if not tmp:
+            tmp = []
+        tmp.append(
+            {
+                'id': goods.id,
+                'count': 1,
+                'price': goods.price
+            }
+        )
+        request.session['basket'] = tmp
+        return HttpResponse('ok')
+    except:
+        context = {}
+        log.error('Error basket_add')
+        return HttpResponse('error')
