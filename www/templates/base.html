@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/modernizr.custom.46884.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/jquery.slicebox.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery-notifer.js' %}"></script>
 	</head>
     <body>
         <div class="main_wrap">
@@ -21,12 +22,12 @@
         <table class="header">
             <tr>
                 <td class="headerl"></td>
-                <td class="headerr">
+                <td class="headerr" id="basket">
                     <div class="cart_info cart_info_ex">
                         <div class="title">Мой заказ</div>
-                        <div class="price"><span>500</span> тнг.</div>
+                        <div class="price"><span id="basket_sum">0</span> тнг.</div>
                         <button class="butt" type="button" onclick="location.href='#'">Оформить</button>
-                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -123,6 +124,20 @@
         <script type="text/javascript">
         {% block bottom_script %}
         {% endblock %}
+        function update_bsket(){
+            $.ajax({
+                url: '/shop/basket/',
+                cache: false,
+                success: function(data){
+                    $('#basket').html(data);
+                },
+                error: function(e, xhr){
+                    msg_error("", "Error update basket.");
+                }
+            });
+        }
+
+        update_bsket();
         </script>
     </body>
 </html>

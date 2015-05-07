@@ -47,3 +47,36 @@ def get_sub_menu(request, menu_slug, sub_menu_slug):
         context = {}
         log.error('Error get_menu')
     return render(request, 'shop/menu.html', context)
+
+
+def get_basket(request):
+    try:
+        '''
+        request.session['basket'] = [
+            {
+                'id': 2,
+                'count': 3,
+                'price': 1200
+            },
+            {
+                'id': 3,
+                'count': 1,
+                'price': 500
+            },
+            {
+                'id': 6,
+                'count': 2,
+                'price': 250
+            },
+        ]
+        '''
+        summ = 0
+        for item in request.session['basket']:
+            summ = summ + item['count']*item['price']
+        context = {
+            'summ': summ,
+        }
+    except:
+        context = {}
+        log.error('Error get_menu')
+    return render(request, 'shop/basket.html', context)
