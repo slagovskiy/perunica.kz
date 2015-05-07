@@ -90,7 +90,7 @@ def basket_add(request, id):
             tmp = []
         for item in tmp:
             if goods.id == item['id']:
-                item['count'] = item['count'] + 1
+                item['count'] += 1
                 request.session['basket'] = tmp
                 return HttpResponse('ok')
         tmp.append(
