@@ -12,21 +12,28 @@ function update_bsket(){
 }
 
 function cart_add_choice(id){
-    $(function() {
-        $( "#dialog-choice" ).dialog({
-            //dialogClass: "no-close",
-            resizable: false,
-            height:440,
-            width: 600,
-            modal: true,
-            closeOnEscape: false,
-            title: "Уточните выбор"
-            //buttons: {
-            //"Закрыть": function() {
-            //        $( this ).dialog( "close" );
-            //    }
-            //}
-        });
+    $.ajax({
+        url: '/shop/choice/'+id+'/',
+        cache: false,
+        success: function(data){
+            if(data=='ok')
+            {
+                $( "#dialog-choice" ).html(data);
+                $(function() {
+                    $( "#dialog-choice" ).dialog({
+                        resizable: false,
+                        height:440,
+                        width: 600,
+                        modal: true,
+                        closeOnEscape: false,
+                        title: "Уточните выбор"
+                    });
+                });
+            }
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка загрузки данных.");
+        }
     });
 }
 
