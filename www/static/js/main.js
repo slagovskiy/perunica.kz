@@ -11,6 +11,23 @@ function update_bsket(){
     });
 }
 
+function cart_add_choice(id){
+    $(function() {
+        $( "#dialog-choice" ).dialog({
+            //dialogClass: "no-close",
+            resizable: false,
+            height:140,
+            modal: true,
+            title: "Уточните выбор",
+            buttons: {
+            "Закрыть": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+    });
+}
+
 function cart_add_good(id){
     $.ajax({
         url: '/shop/basket/add/'+id+'/',
