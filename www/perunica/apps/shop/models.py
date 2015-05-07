@@ -109,7 +109,7 @@ class Goods(models.Model):
         else:
             filename = '{}.{}'.format(str(uuid.uuid1()), ext)
         return os.path.join('goods', filename)
-    image = models.ImageField(upload_to=upload_to, null=True, verbose_name=u'Image')
+    image = models.ImageField(upload_to=upload_to, null=True, blank=True, verbose_name=u'Image')
 
     def __str__(self):
         return '[%s] %s' % (self.menu.name, self.name)
