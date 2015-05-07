@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Menu, SubMenu, Unit, Goods
+from django.forms import SelectMultiple
+from django.db import models
+from .models import Menu, SubMenu, Unit, Goods, GoodsGroup
 
 
 class MenuAdmin(admin.ModelAdmin):
@@ -32,7 +34,20 @@ class GoodsAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+class GoodsGroupAdmin(admin.ModelAdmin):
+    ordering = ['name']
+    list_display = ['name', 'deleted']
+    list_filter = ['name']
+    search_fields = ['name']
+    formfield_overrides = {
+        models.ManyToManyField: {
+            'widget': SelectMultiple(attrs={'size':'14'})
+        },
+        }
+
+
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(SubMenu, SubMenuAdmin)
 admin.site.register(Unit, UnitAdmin)
 admin.site.register(Goods, GoodsAdmin)
+admin.site.register(GoodsGroup, GoodsGroupAdmin)
