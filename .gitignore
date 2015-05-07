@@ -5,6 +5,7 @@
 *~
 ~$*
 /tmp/*
+/www/tmp/*
 __pycache__
 
 # Project specific #
