@@ -7,7 +7,13 @@
             </div>
             <div class="price">{{ item.price }} тнг.</div>
             <div class="order">
-                <button class="butt" onclick="cart_add_good({{ item.id }})">заказать</button>
+                {% if item.choice %}
+                    <button class="butt" onclick="cart_add_choice({{ item.id }})">заказать</button>
+                {% elif item.option1 or item.option2 or item.option3 %}
+                    <button class="butt" onclick="cart_add_option({{ item.id }})">заказать</button>
+                {% else %}
+                    <button class="butt" onclick="cart_add_good({{ item.id }})">заказать</button>
+                {% endif %}
             </div>
             <div class="clear"></div>
         </div>
