@@ -101,3 +101,13 @@ def basket_add(request, id):
         context = {}
         log.error('Error basket_add')
         return HttpResponse('error')
+
+
+def basket_clear(request):
+    try:
+        request.session['basket'] = []
+        return HttpResponse('ok')
+    except:
+        context = {}
+        log.error('Error basket_clear')
+        return HttpResponse('error')
