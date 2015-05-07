@@ -124,20 +124,6 @@
         <script type="text/javascript">
         {% block bottom_script %}
         {% endblock %}
-        function update_bsket(){
-            $.ajax({
-                url: '/shop/basket/',
-                cache: false,
-                success: function(data){
-                    $('#basket').html(data);
-                },
-                error: function(e, xhr){
-                    msg_error("", "Error update basket.");
-                }
-            });
-        }
-
-        update_bsket();
         </script>
     </body>
 </html>
