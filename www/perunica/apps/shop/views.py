@@ -51,25 +51,8 @@ def get_sub_menu(request, menu_slug, sub_menu_slug):
 
 def get_basket(request):
     try:
-        '''
-        request.session['basket'] = [
-            {
-                'id': 2,
-                'count': 3,
-                'price': 1200
-            },
-            {
-                'id': 3,
-                'count': 1,
-                'price': 500
-            },
-            {
-                'id': 6,
-                'count': 2,
-                'price': 250
-            },
-        ]
-        '''
+        if not request.session['basket']:
+            request.session['basket'] = []
         summ = 0
         for item in request.session['basket']:
             summ = summ + item['count']*item['price']
