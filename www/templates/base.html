@@ -46,60 +46,8 @@
         <a class="prev" style="height: 200px;"></a>
         <a class="next" style="height: 200px;"></a>
         </div>
-        <div>
-            <ul id="sb-slider" class="sb-slider">
-                <li>
-                    <a href="#" target="_blank"><img src="{% static 'img/baner1.jpg' %}" alt="image1"/></a>
-                </li>
-                <li>
-                    <a href="#" target="_blank"><img src="{% static 'img/baner2.jpg' %}" alt="image2"/></a>
-                </li>
-                <li>
-                    <a href="#" target="_blank"><img src="{% static 'img/baner3.jpg' %}" alt="image1"/></a>
-                </li>
-                <li>
-                    <a href="#" target="_blank"><img src="{% static 'img/baner4.jpg' %}" alt="image1"/></a>
-                </li>
-            </ul>
-                <script type="text/javascript">
-                $(function() {
-                    var Page = (function() {
-                        var $navArrows = $( '#nav-arrows' ).hide(),
-                            $shadow = $( '#shadow' ).hide(),
-                            slicebox = $( '#sb-slider' ).slicebox( {
-                                onReady : function() {
-                                    $navArrows.show();
-                                    $shadow.show();
-                                },
-                                autoplay : true,
-                                interval: 5000,
-                                cuboidsCount : 5,
-                                maxCuboidsCount : 7,
-                                orientation : 'r',
-                                cuboidsRandom : true,
-                                disperseFactor : 30
-                            } ),
-                            init = function() {
-                                initEvents();
-                            },
-                            initEvents = function() {
-                                $navArrows.children( ':first' ).on( 'click', function() {
-                                    slicebox.next();
-                                    return false;
-                                } );
-                                $navArrows.children( ':last' ).on( 'click', function() {
-                                    slicebox.previous();
-                                    return false;
-                                } );
-                            };
-                            return { init : init };
-                    })();
-                    Page.init();
-                });
-            </script>
-            <div id="shadow" class="shadow"></div>
-        </div>
-        <div class="clear"></div>
+
+        {% widget_main_banner %}
 
         {% widget_main_menu %}
 
