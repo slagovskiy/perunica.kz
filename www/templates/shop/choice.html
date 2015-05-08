@@ -2,7 +2,7 @@
         <div class="info">
             {% for item in choice %}
             <div class="item" onclick="cart_select_choice({{ item.id }});">
-                <img src="{{ item.image.url }}">
+                {% if item.image %}<img src="{{ item.image.url }}">{% else %}<img src="{% static 'img/no_image.jpg' %}">{% endif %}
                 <span>{{ item.name }}</span>
             </div>
             {% endfor %}
