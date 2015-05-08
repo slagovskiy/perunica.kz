@@ -23,3 +23,13 @@ def widget_sub_menu(menu):
     except:
         log.exception('Error get sub menu')
     return {'sub_menu': sub_menu}
+
+
+@register.inclusion_tag('widgets/main_banner.html')
+def widget_main_banner():
+    try:
+        from perunica.apps.banner.models import Banner
+        banner = Banner.objects.order_by('name').exclude(deleted=True)
+    except:
+        log.exception('Error get main banner')
+    return {'banner': banner}
