@@ -1,0 +1,35 @@
+{% load static %}
+    <div class="chwin">
+        <div class="info">
+            {% if option1 %}
+                <div id="option1">
+                    {% for item in option1 %}
+                    <div class="item" onclick="cart_select_option1({{ item.id }});">
+                        {% if item.image %}<img src="{{ item.image.url }}">{% else %}<img src="{% static 'img/no_image.jpg' %}">{% endif %}
+                        <span>{{ item.name }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if option2 %}
+                <div id="option2">
+                    {% for item in option2 %}
+                    <div class="item" onclick="cart_select_option2({{ item.id }});">
+                        {% if item.image %}<img src="{{ item.image.url }}">{% else %}<img src="{% static 'img/no_image.jpg' %}">{% endif %}
+                        <span>{{ item.name }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if option3 %}
+                <div id="option3">
+                    {% for item in option3 %}
+                    <div class="item" onclick="cart_select_option3({{ item.id }});">
+                        {% if item.image %}<img src="{{ item.image.url }}">{% else %}<img src="{% static 'img/no_image.jpg' %}">{% endif %}
+                        <span>{{ item.name }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
