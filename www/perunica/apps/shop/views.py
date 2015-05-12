@@ -2,7 +2,7 @@ import logging
 from django.shortcuts import render
 from perunica.apps.shop.models import Menu, SubMenu, Goods, GoodsGroup, GoodsLinkGroup
 from django.http import HttpResponse
-
+import uuid
 
 log = logging.getLogger(__name__)
 
@@ -67,6 +67,52 @@ def get_basket(request):
     return render(request, 'shop/basket.html', context)
 
 
+def basket_edit(request):
+    try:
+        if 'basket' not in request.session:
+            request.session['basket'] = []
+        context = {}
+    except:
+        context = {}
+        log.exception('Error get_basket')
+    return render(request, 'shop/basket_edit.html', context)
+
+
+def basket_data(request):
+    try:
+        if 'basket' not in request.session:
+            request.session['basket'] = []
+        order = []
+        for item in request.session['basket']:
+            summ = 0
+            g = Goods.objects.get(id=item['id'])
+            tmp = {
+                'goods': g,
+                'uuid': item['uuid'],
+                'count': item['count'],
+                'option': []
+            }
+            for _item in item['option']:
+                o = Goods.objects.get(id=_item['id'])
+                summ += o.price * _item['count']
+                _tmp = {
+                    'goods': o,
+                    'uuid': _item['uuid'],
+                    'count': _item['count']
+                }
+                tmp['option'].append(_tmp)
+            summ += g.price * item['count']
+            tmp['summ'] = summ
+            order.append(tmp)
+        context = {
+            'order': order
+        }
+    except:
+        context = {}
+        log.exception('Error get_basket')
+    return render(request, 'shop/basket_data.html', context)
+
+
 def basket_add(request, id):
     try:
         _id = str(id).split('-')
@@ -83,6 +129,7 @@ def basket_add(request, id):
             tmp.append(
                 {
                     'id': goods.id,
+                    'uuid': uuid.uuid1().hex,
                     'count': 1,
                     'price': goods.price,
                     'option': []
@@ -100,6 +147,7 @@ def basket_add(request, id):
                 _tmp.append(
                     {
                         'id': goods.id,
+                        'uuid': uuid.uuid1().hex,
                         'count': 1,
                         'price': goods.price,
                         'option': []
@@ -110,6 +158,7 @@ def basket_add(request, id):
                     _tmp[0]['option'].append(
                         {
                             'id': option1.id,
+                            'uuid': uuid.uuid1().hex,
                             'count': 1,
                             'price': option1.price
                         }
@@ -120,6 +169,7 @@ def basket_add(request, id):
                     _tmp[0]['option'].append(
                         {
                             'id': option2.id,
+                            'uuid': uuid.uuid1().hex,
                             'count': 1,
                             'price': option2.price
                         }
@@ -129,6 +179,7 @@ def basket_add(request, id):
                     _tmp[0]['option'].append(
                         {
                             'id': option3.id,
+                            'uuid': uuid.uuid1().hex,
                             'count': 1,
                             'price': option3.price
                         }

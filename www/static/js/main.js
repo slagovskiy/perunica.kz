@@ -11,6 +11,19 @@ function update_bsket(){
     });
 }
 
+function load_basket_data(){
+    $.ajax({
+        url: '/shop/basket/data/',
+        cache: false,
+        success: function(data){
+            $('#cart_data').html(data);
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка загрузки корзины.");
+        }
+    });
+}
+
 function cart_add_option(id){
     $.ajax({
         url: '/shop/option/'+id+'/',

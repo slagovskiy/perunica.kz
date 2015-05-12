@@ -1,0 +1,46 @@
+    <div class="cart cartfull">
+        <h1>
+            <b>Ваш заказ</b>
+            <span>Адрес</span>
+            <span>Подтверждение</span>
+        </h1>
+        <div class="txt">
+            <div class="cart-items">
+                {% for item in order %}
+                <div class="item">
+                    <div class="title">
+                        <b>{{ item.goods.name }}</b><br>
+                        <i>{{ item.goods.menu.name }}</i>
+                        {% if item.option %}
+                            <span>
+                                {% for option in item.option %}
+                                    {{ option.goods.name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="price">{% if item.option %}{{ item.summ }}{% else %}{{ item.goods.price }}{% endif %} тнг.</div>
+                    <div class="count numcount">
+                        {% if item.option %}
+                            <a class="c0"></a><input type="text" value="{{ item.count }}" readonly><a class="c0"></a>
+                        {% else %}
+                            <a class="c1"></a><input type="text" value="{{ item.count }}"><a class="c2"></a>
+                        {% endif %}
+                    </div>
+                    <div class="sum">{{ item.summ }} тнг.</div>
+                    <div class="del"><a onclick="cart_delete_item(this)"></a></div>
+                    <div class="clear"></div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="butts">
+                <button class="butt" onclick="load_basket_data()">Пересчитать</button>
+                <button class="butt" onclick="location.href='#'" type="button">Продолжить</button>
+            </div>
+            <div class="total">Общая сумма:<span>940 руб.</span></div>
+            <div class="clear"></div>
+            <div class="clear"></div>
+            <div class="min-sum">Минимальная сумма заказа - 400 руб.</div>
+            <div class="clear"></div>
+        </div>
+    </div>

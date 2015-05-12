@@ -311,6 +311,13 @@ a.logo {
 	padding-top:25px;
 	padding-bottom:50px;
 }
+.rsection_t {
+	width:752px;
+	float:right;
+	margin-right:15px;
+	padding-top:0px;
+	padding-bottom:50px;
+}
 .rsection_m {
 	width:752px;
 	float:right;
@@ -628,6 +635,7 @@ a.logo {
 .cart .item .count {
 	float:left;
 	width:110px;
+    text-align: center;
 }
 .cart .item .sum {
 	float:left;
@@ -646,7 +654,17 @@ a.logo {
 	display:block;
 	width:25px;
 	height:25px;
-	background:url('../../img/cform/delete.png') no-repeat;
+	background:url('../img/delete.png') no-repeat;
+}
+.cart .item .count a.c0 {
+	float:left;
+	cursor:default;
+	display:block;
+	width:19px;
+	height:19px;
+	background:url('../img/null.png') no-repeat;
+	margin-top:4px;
+	margin-right:2px;
 }
 .cart .item .count a.c1 {
 	float:left;
@@ -654,7 +672,7 @@ a.logo {
 	display:block;
 	width:19px;
 	height:19px;
-	background:url('../../img/cform/minus.jpg') no-repeat;
+	background:url('../img/minus.jpg') no-repeat;
 	margin-top:4px;
 	margin-right:2px;
 }
@@ -664,7 +682,7 @@ a.logo {
 	display:block;
 	width:19px;
 	height:19px;
-	background:url('../../img/cform/plus.jpg') no-repeat;
+	background:url('../img/plus.jpg') no-repeat;
 	margin-top:4px;
 	margin-left:2px;
 }
@@ -759,7 +777,7 @@ a.logo {
 	display:block;
 	width:19px;
 	height:19px;
-	background:url('../../img/cform/minus.jpg') no-repeat;
+	background:url('../img/minus.jpg') no-repeat;
 	margin-top:4px;
 	margin-right:2px;
 }
@@ -769,7 +787,7 @@ a.logo {
 	display:block;
 	width:19px;
 	height:19px;
-	background:url('../../img/cform/plus.jpg') no-repeat;
+	background:url('../img/plus.jpg') no-repeat;
 	margin-top:4px;
 	margin-left:2px;
 }
