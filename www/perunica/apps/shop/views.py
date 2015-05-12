@@ -55,7 +55,9 @@ def get_basket(request):
             request.session['basket'] = []
         summ = 0
         for item in request.session['basket']:
-            summ = summ + item['count']*item['price']
+            summ += float(item['count'])*float(item['price'])
+            for _item in item['option']:
+                summ += float(_item['count'])*float(_item['price'])
         context = {
             'summ': summ,
         }
@@ -94,7 +96,8 @@ def basket_add(request, id):
                 tmp = request.session['basket']
                 if not tmp:
                     tmp = []
-                tmp.append(
+                _tmp = []
+                _tmp.append(
                     {
                         'id': goods.id,
                         'count': 1,
@@ -104,7 +107,7 @@ def basket_add(request, id):
                 )
                 if int(_id[1])!=0:
                     option1 = Goods.objects.all().get(id=_id[1])
-                    tmp[0]['option'].append(
+                    _tmp[0]['option'].append(
                         {
                             'id': option1.id,
                             'count': 1,
@@ -114,7 +117,7 @@ def basket_add(request, id):
 
                 if int(_id[2])!=0:
                     option2 = Goods.objects.all().get(id=_id[2])
-                    tmp[0]['option'].append(
+                    _tmp[0]['option'].append(
                         {
                             'id': option2.id,
                             'count': 1,
@@ -123,13 +126,14 @@ def basket_add(request, id):
                     )
                 if int(_id[3])!=0:
                     option3 = Goods.objects.all().get(id=_id[3])
-                    tmp[0]['option'].append(
+                    _tmp[0]['option'].append(
                         {
                             'id': option3.id,
                             'count': 1,
                             'price': option3.price
                         }
                     )
+                tmp.extend(_tmp)
                 request.session['basket'] = tmp
                 return HttpResponse('ok')
             else:
