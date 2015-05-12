@@ -67,26 +67,74 @@ def get_basket(request):
 
 def basket_add(request, id):
     try:
-        goods = Goods.objects.all().filter(id=id)[0]
-        tmp = request.session['basket']
-        if not tmp:
-            tmp = []
-        for item in tmp:
-            if goods.id == item['id']:
-                item['count'] += 1
+        _id = str(id).split('-')
+        if len(_id)==1:
+            goods = Goods.objects.all().get(id=_id[0])
+            tmp = request.session['basket']
+            if not tmp:
+                tmp = []
+            for item in tmp:
+                if goods.id == item['id']:
+                    item['count'] += 1
+                    request.session['basket'] = tmp
+                    return HttpResponse('ok')
+            tmp.append(
+                {
+                    'id': goods.id,
+                    'count': 1,
+                    'price': goods.price,
+                    'option': []
+                }
+            )
+            request.session['basket'] = tmp
+            return HttpResponse('ok')
+        else:
+            if len(_id)==4:
+                goods = Goods.objects.all().get(id=_id[0])
+                tmp = request.session['basket']
+                if not tmp:
+                    tmp = []
+                tmp.append(
+                    {
+                        'id': goods.id,
+                        'count': 1,
+                        'price': goods.price,
+                        'option': []
+                    }
+                )
+                if int(_id[1])!=0:
+                    option1 = Goods.objects.all().get(id=_id[1])
+                    tmp[0]['option'].append(
+                        {
+                            'id': option1.id,
+                            'count': 1,
+                            'price': option1.price
+                        }
+                    )
+
+                if int(_id[2])!=0:
+                    option2 = Goods.objects.all().get(id=_id[2])
+                    tmp[0]['option'].append(
+                        {
+                            'id': option2.id,
+                            'count': 1,
+                            'price': option2.price
+                        }
+                    )
+                if int(_id[3])!=0:
+                    option3 = Goods.objects.all().get(id=_id[3])
+                    tmp[0]['option'].append(
+                        {
+                            'id': option3.id,
+                            'count': 1,
+                            'price': option3.price
+                        }
+                    )
                 request.session['basket'] = tmp
                 return HttpResponse('ok')
-        tmp.append(
-            {
-                'id': goods.id,
-                'count': 1,
-                'price': goods.price
-            }
-        )
-        request.session['basket'] = tmp
-        return HttpResponse('ok')
+            else:
+                return HttpResponse('error')
     except:
-        context = {}
         log.exception('Error basket_add')
         return HttpResponse('error')
 

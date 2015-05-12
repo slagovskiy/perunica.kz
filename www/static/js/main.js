@@ -17,6 +17,10 @@ function cart_add_option(id){
         cache: false,
         success: function(data){
             $( "#dialog-option" ).html(data);
+            $( "#dialog-option #main-val").val(id);
+            if($( "#dialog-option #option1" ).html()!='') {
+                $( "#dialog-option #option1").show();
+            }
             $(function() {
                 $( "#dialog-option" ).dialog({
                     resizable: false,
@@ -30,6 +34,57 @@ function cart_add_option(id){
         },
         error: function(e, xhr){
             msg_error("", "Ошибка загрузки данных.");
+        }
+    });
+}
+
+function cart_select_option1(id){
+    $( "#dialog-option #option1-val").val(id);
+    if($( "#dialog-option #option2" ).html().trim()!='') {
+        $( "#dialog-option #option1").hide();
+        $( "#dialog-option #option3").hide();
+        $( "#dialog-option #option2").show();
+    } else {
+        $( "#dialog-option" ).dialog( "close" );
+        cart_send_option();
+    }
+}
+
+function cart_select_option2(id){
+    $( "#dialog-option #option2-val").val(id);
+    if($( "#dialog-option #option3" ).html().trim()!='') {
+        $( "#dialog-option #option1").hide();
+        $( "#dialog-option #option2").hide();
+        $( "#dialog-option #option3").show();
+    } else {
+        $( "#dialog-option" ).dialog( "close" );
+        cart_send_option();
+    }
+}
+
+function cart_select_option3(id){
+    $( "#dialog-option #option3-val").val(id);
+    $( "#dialog-option" ).dialog( "close" );
+    cart_send_option();
+}
+
+function cart_send_option() {
+    $.ajax({
+        url: '/shop/basket/add/' +
+            $( "#dialog-option #main-val").val() + '-' +
+            $( "#dialog-option #option1-val").val() + '-' +
+            $( "#dialog-option #option2-val").val() + '-' +
+            $( "#dialog-option #option3-val").val()+'/',
+        cache: false,
+        success: function(data){
+            if(data=='ok')
+            {
+                msg_info("", "Позиция добавлена в корзину.");
+                update_bsket();
+            }
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка добавления в корзину.");
         }
     });
 }
