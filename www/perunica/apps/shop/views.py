@@ -15,7 +15,7 @@ def index(request):
         }
     except:
         context = {}
-        log.error('Error get_index')
+        log.exception('Error get_index')
     return render(request, 'shop/index.html', context)
 
 
@@ -29,7 +29,7 @@ def get_menu(request, menu_slug):
         }
     except:
         context = {}
-        log.error('Error get_menu')
+        log.exception('Error get_menu')
     return render(request, 'shop/menu.html', context)
 
 
@@ -45,7 +45,7 @@ def get_sub_menu(request, menu_slug, sub_menu_slug):
         }
     except:
         context = {}
-        log.error('Error get_menu')
+        log.exception('Error get_menu')
     return render(request, 'shop/menu.html', context)
 
 
@@ -61,7 +61,7 @@ def get_basket(request):
         }
     except:
         context = {}
-        log.error('Error get_basket')
+        log.exception('Error get_basket')
     return render(request, 'shop/basket.html', context)
 
 
@@ -87,7 +87,7 @@ def basket_add(request, id):
         return HttpResponse('ok')
     except:
         context = {}
-        log.error('Error basket_add')
+        log.exception('Error basket_add')
         return HttpResponse('error')
 
 
@@ -110,5 +110,31 @@ def get_choice(request, id):
         }
     except:
         context = {}
-        log.error('Error get_choice')
+        log.exception('Error get_choice')
     return render(request, 'shop/choice.html', context)
+
+
+def get_option(request, id):
+    try:
+        goods = Goods.objects.all().get(id=id)
+        if goods.option1:
+            option1 = GoodsLinkGroup.objects.filter(group=goods.option1)[0].goods.all()
+        else:
+            option1 = []
+        if goods.option2:
+            option2 = GoodsLinkGroup.objects.filter(group=goods.option2)[0].goods.all()
+        else:
+            option2 = []
+        if goods.option3:
+            option3 = GoodsLinkGroup.objects.filter(group=goods.option3)[0].goods.all()
+        else:
+            option3 = []
+        context = {
+            'option1': option1,
+            'option2': option2,
+            'option3': option3
+        }
+    except:
+        context = {}
+        log.exception('Error get_option')
+    return render(request, 'shop/option.html', context)
