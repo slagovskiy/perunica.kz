@@ -81,6 +81,7 @@ class Unit(models.Model):
 class GoodsGroup(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     name = models.CharField(max_length=255, verbose_name=u'Name')
+    title = models.CharField(max_length=255, default=u'', verbose_name=u'Title')
 
     def __str__(self):
         return self.name
