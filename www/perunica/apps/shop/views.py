@@ -173,20 +173,29 @@ def get_option(request, id):
         goods = Goods.objects.all().get(id=id)
         if goods.option1:
             option1 = GoodsLinkGroup.objects.filter(group=goods.option1)[0].goods.all()
+            option1_title = GoodsLinkGroup.objects.filter(group=goods.option1)[0].group.title
         else:
             option1 = []
+            option1_title = ''
         if goods.option2:
             option2 = GoodsLinkGroup.objects.filter(group=goods.option2)[0].goods.all()
+            option2_title = GoodsLinkGroup.objects.filter(group=goods.option2)[0].group.title
         else:
             option2 = []
+            option2_title = ''
         if goods.option3:
             option3 = GoodsLinkGroup.objects.filter(group=goods.option3)[0].goods.all()
+            option3_title = GoodsLinkGroup.objects.filter(group=goods.option3)[0].group.title
         else:
             option3 = []
+            option3_title = ''
         context = {
             'option1': option1,
             'option2': option2,
-            'option3': option3
+            'option3': option3,
+            'option1_title': option1_title,
+            'option2_title': option2_title,
+            'option3_title': option3_title,
         }
     except:
         context = {}

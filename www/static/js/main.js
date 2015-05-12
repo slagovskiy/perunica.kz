@@ -27,10 +27,10 @@ function cart_add_option(id){
                     height:440,
                     width: 600,
                     modal: true,
-                    closeOnEscape: false,
-                    title: "Уточните выбор"
+                    closeOnEscape: false
                 });
             });
+            $( "#dialog-option" ).dialog( "option", "title", $( "#dialog-option #option1-title").val() );
         },
         error: function(e, xhr){
             msg_error("", "Ошибка загрузки данных.");
@@ -44,6 +44,7 @@ function cart_select_option1(id){
         $( "#dialog-option #option1").hide();
         $( "#dialog-option #option3").hide();
         $( "#dialog-option #option2").show();
+        $( "#dialog-option" ).dialog( "option", "title", $( "#dialog-option #option2-title").val() );
     } else {
         $( "#dialog-option" ).dialog( "close" );
         cart_send_option();
@@ -56,6 +57,7 @@ function cart_select_option2(id){
         $( "#dialog-option #option1").hide();
         $( "#dialog-option #option2").hide();
         $( "#dialog-option #option3").show();
+        $( "#dialog-option" ).dialog( "option", "title", $( "#dialog-option #option3-title").val() );
     } else {
         $( "#dialog-option" ).dialog( "close" );
         cart_send_option();
