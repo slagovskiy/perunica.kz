@@ -11,6 +11,29 @@ function update_bsket(){
     });
 }
 
+function cart_add_option(id){
+    $.ajax({
+        url: '/shop/option/'+id+'/',
+        cache: false,
+        success: function(data){
+            $( "#dialog-option" ).html(data);
+            $(function() {
+                $( "#dialog-option" ).dialog({
+                    resizable: false,
+                    height:440,
+                    width: 600,
+                    modal: true,
+                    closeOnEscape: false,
+                    title: "Уточните выбор"
+                });
+            });
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка загрузки данных.");
+        }
+    });
+}
+
 function cart_add_choice(id){
     $.ajax({
         url: '/shop/choice/'+id+'/',
