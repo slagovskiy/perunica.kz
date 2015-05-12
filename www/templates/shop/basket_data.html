@@ -24,11 +24,11 @@
                         {% if item.option %}
                             <a class="c0"></a><input type="text" value="{{ item.count }}" readonly><a class="c0"></a>
                         {% else %}
-                            <a class="c1"></a><input type="text" value="{{ item.count }}"><a class="c2"></a>
+                            <a {% ifequal item.count 1 %}class="c0"{% else %}class="c1"  onclick="cart_minus_item('{{ item.uuid }}')"{% endifequal %}></a><input type="text" value="{{ item.count }}" readonly><a class="c2" onclick="cart_plus_item('{{ item.uuid }}')"></a>
                         {% endif %}
                     </div>
                     <div class="sum">{{ item.summ }} тнг.</div>
-                    <div class="del"><a onclick="cart_delete_item(this)"></a></div>
+                    <div class="del"><a onclick="cart_delete_item('{{ item.uuid }}')"></a></div>
                     <div class="clear"></div>
                 </div>
                 {% endfor %}
@@ -37,10 +37,10 @@
                 <button class="butt" onclick="load_basket_data()">Пересчитать</button>
                 <button class="butt" onclick="location.href='#'" type="button">Продолжить</button>
             </div>
-            <div class="total">Общая сумма:<span>940 руб.</span></div>
+            <div class="total">Общая сумма:<span>{{ total_summ }} тнг.</span></div>
             <div class="clear"></div>
             <div class="clear"></div>
-            <div class="min-sum">Минимальная сумма заказа - 400 руб.</div>
+            <!--<div class="min-sum">Минимальная сумма заказа - .</div>-->
             <div class="clear"></div>
         </div>
     </div>

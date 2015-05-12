@@ -1,4 +1,4 @@
-function update_bsket(){
+function update_basket(){
     $.ajax({
         url: '/shop/basket/',
         cache: false,
@@ -20,6 +20,48 @@ function load_basket_data(){
         },
         error: function(e, xhr){
             msg_error("", "Ошибка загрузки корзины.");
+        }
+    });
+}
+
+function cart_minus_item(uuid){
+    $.ajax({
+        url: '/shop/basket/item/minus/'+uuid+'/',
+        cache: false,
+        success: function(data){
+            load_basket_data();
+            update_basket();
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка изменения количества.");
+        }
+    });
+}
+
+function cart_plus_item(uuid){
+    $.ajax({
+        url: '/shop/basket/item/plus/'+uuid+'/',
+        cache: false,
+        success: function(data){
+            load_basket_data();
+            update_basket();
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка изменения количества.");
+        }
+    });
+}
+
+function cart_delete_item(uuid){
+    $.ajax({
+        url: '/shop/basket/item/delete/'+uuid+'/',
+        cache: false,
+        success: function(data){
+            load_basket_data();
+            update_basket();
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка удаления позиции.");
         }
     });
 }
@@ -95,7 +137,7 @@ function cart_send_option() {
             if(data=='ok')
             {
                 msg_info("", "Позиция добавлена в корзину.");
-                update_bsket();
+                update_basket();
             }
         },
         error: function(e, xhr){
@@ -140,7 +182,7 @@ function cart_add_good(id){
             if(data=='ok')
             {
                 msg_info("", "Позиция добавлена в корзину.");
-                update_bsket();
+                update_basket();
             }
         },
         error: function(e, xhr){
@@ -152,7 +194,7 @@ function cart_add_good(id){
 
 
 $(window.document).ready(function() {
-    update_bsket();
+    update_basket();
 
 	$(".items[data-show='1'] .item").each(function() {
 		var info=$(this).find(".info");

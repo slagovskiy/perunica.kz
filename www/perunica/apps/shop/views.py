@@ -83,6 +83,7 @@ def basket_data(request):
         if 'basket' not in request.session:
             request.session['basket'] = []
         order = []
+        total_summ = 0
         for item in request.session['basket']:
             summ = 0
             g = Goods.objects.get(id=item['id'])
@@ -103,9 +104,11 @@ def basket_data(request):
                 tmp['option'].append(_tmp)
             summ += g.price * item['count']
             tmp['summ'] = summ
+            total_summ += summ
             order.append(tmp)
         context = {
-            'order': order
+            'order': order,
+            'total_summ': total_summ
         }
     except:
         context = {}
@@ -191,6 +194,57 @@ def basket_add(request, id):
                 return HttpResponse('error')
     except:
         log.exception('Error basket_add')
+        return HttpResponse('error')
+
+
+def basket_item_minus(request, uu):
+    try:
+        tmp = request.session['basket']
+        if not tmp:
+            tmp = []
+        for item in tmp:
+            if uu == item['uuid']:
+                item['count'] -= 1
+                request.session['basket'] = tmp
+                return HttpResponse('ok')
+        request.session['basket'] = tmp
+        return HttpResponse('ok')
+    except:
+        log.exception('Error basket_item_minus')
+        return HttpResponse('error')
+
+
+def basket_item_plus(request, uu):
+    try:
+        tmp = request.session['basket']
+        if not tmp:
+            tmp = []
+        for item in tmp:
+            if uu == item['uuid']:
+                item['count'] += 1
+                request.session['basket'] = tmp
+                return HttpResponse('ok')
+        request.session['basket'] = tmp
+        return HttpResponse('ok')
+    except:
+        log.exception('Error basket_item_minus')
+        return HttpResponse('error')
+
+
+def basket_item_delete(request, uu):
+    try:
+        tmp = request.session['basket']
+        if not tmp:
+            tmp = []
+        for item in tmp:
+            if uu == item['uuid']:
+                tmp.remove(item)
+                request.session['basket'] = tmp
+                return HttpResponse('ok')
+        request.session['basket'] = tmp
+        return HttpResponse('ok')
+    except:
+        log.exception('Error basket_item_minus')
         return HttpResponse('error')
 
 
