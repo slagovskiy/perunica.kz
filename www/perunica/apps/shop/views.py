@@ -157,8 +157,10 @@ def get_choice(request, id):
     try:
         goods = Goods.objects.all().get(id=id)
         choice = GoodsLinkGroup.objects.filter(group=goods.choice)[0].goods.all()
+        title = GoodsLinkGroup.objects.filter(group=goods.choice)[0].group.title
         context = {
-            'choice': choice
+            'choice': choice,
+            'title': title
         }
     except:
         context = {}

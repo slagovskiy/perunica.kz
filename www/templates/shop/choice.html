@@ -1,5 +1,6 @@
 {% load static %}
     <div class="chwin">
+        <input type="hidden" id="dialog-title" value="{{ title }}">
         <div class="info">
             {% for item in choice %}
             <div class="item" onclick="cart_select_choice({{ item.id }});">

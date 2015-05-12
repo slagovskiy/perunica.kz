@@ -102,7 +102,7 @@ function cart_add_choice(id){
                     width: 600,
                     modal: true,
                     closeOnEscape: false,
-                    title: "Уточните выбор"
+                    title: $('#dialog-choice #dialog-title').val()
                 });
             });
         },
