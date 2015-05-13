@@ -24,6 +24,19 @@ function load_basket_data(){
     });
 }
 
+function load_basket_delivery(){
+    $.ajax({
+        url: '/shop/basket/delivery/',
+        cache: false,
+        success: function(data){
+            $('#cart_data').html(data);
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка загрузки корзины.");
+        }
+    });
+}
+
 function cart_minus_item(uuid){
     $.ajax({
         url: '/shop/basket/item/minus/'+uuid+'/',

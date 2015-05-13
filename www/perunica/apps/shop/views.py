@@ -79,6 +79,17 @@ def basket_edit(request):
     return render(request, 'shop/basket_edit.html', context)
 
 
+def basket_delivery(request):
+    try:
+        if 'basket' not in request.session:
+            request.session['basket'] = []
+        context = {}
+    except:
+        context = {}
+        log.exception('Error get_basket')
+    return render(request, 'shop/basket_delivery.html', context)
+
+
 def basket_data(request):
     try:
         if 'basket' not in request.session:

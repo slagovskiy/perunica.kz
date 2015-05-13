@@ -36,7 +36,7 @@
             </div>
             <div class="butts">
                 <button class="butt" onclick="load_basket_data()">Пересчитать</button>
-                {% if next_step %}<button class="butt" onclick="location.href='#'" type="button">Продолжить</button>{% endif %}
+                {% if next_step %}<button class="butt" onclick="load_basket_delivery();" type="button">Продолжить</button>{% endif %}
             </div>
             <div class="total">Общая сумма:<span>{{ total_summ }} тнг.</span></div>
             <div class="clear"></div>
