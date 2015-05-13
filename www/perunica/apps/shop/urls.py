@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'basket/item/delete/(?P<uu>[-\w]+)/$', 'perunica.apps.shop.views.basket_item_delete', name='menu'),
     url(r'basket/data/$', 'perunica.apps.shop.views.basket_data', name='menu'),
     url(r'basket/delivery/$', 'perunica.apps.shop.views.basket_delivery', name='menu'),
+    url(r'basket/confirm/$', 'perunica.apps.shop.views.basket_confirm', name='menu'),
     url(r'basket/edit/$', 'perunica.apps.shop.views.basket_edit', name='menu'),
     url(r'basket/clear/$', 'perunica.apps.shop.views.basket_clear', name='menu'),
     url(r'basket/$', 'perunica.apps.shop.views.get_basket', name='menu'),

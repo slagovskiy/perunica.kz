@@ -37,6 +37,38 @@ function load_basket_delivery(){
     });
 }
 
+function load_basket_confirm(){
+    var ok = true;
+    if ($('#basket_fio').val() == '') {
+        ok = false;
+        msg_error("", "Укажите свое имя.");
+    }
+    if ($('#basket_phone').val() == '') {
+        ok = false;
+        msg_error("", "Укажите свой телефон.");
+    }
+    if ($('#basket_city').val() == '') {
+        ok = false;
+        msg_error("", "Укажите свой город.");
+    }
+    if ($('#basket_address').val() == '') {
+        ok = false;
+        msg_error("", "Укажите свой адрес.");
+    }
+    if(ok) {
+        $.ajax({
+            url: '/shop/basket/confirm/?fio=' + $('#basket_fio').val() + '&phone=' + $('#basket_phone').val() + '&city=' + $('#basket_city').val() + '&address=' + $('#basket_address').val(),
+            cache: false,
+            success: function (data) {
+                $('#cart_data').html(data);
+            },
+            error: function (e, xhr) {
+                msg_error("", "Ошибка загрузки корзины.");
+            }
+        });
+    }
+}
+
 function cart_minus_item(uuid){
     $.ajax({
         url: '/shop/basket/item/minus/'+uuid+'/',

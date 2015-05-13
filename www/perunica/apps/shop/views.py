@@ -90,6 +90,27 @@ def basket_delivery(request):
     return render(request, 'shop/basket_delivery.html', context)
 
 
+def basket_confirm(request):
+    try:
+        if('fio' in request.GET):
+            request.session['fio'] = request.GET['fio']
+        if('phone' in request.GET):
+            request.session['phone'] = request.GET['phone']
+        if('city' in request.GET):
+            request.session['city'] = request.GET['city']
+        if('payment' in request.GET):
+            request.session['payment'] = request.GET['payment']
+        if('address' in request.GET):
+            request.session['address'] = request.GET['address']
+        if 'basket' not in request.session:
+            request.session['basket'] = []
+        context = {}
+    except:
+        context = {}
+        log.exception('Error get_basket')
+    return render(request, 'shop/basket_confirm.html', context)
+
+
 def basket_data(request):
     try:
         if 'basket' not in request.session:
