@@ -2,7 +2,7 @@
 {% load widgets %}
 <html>
 	<head>
-    	<title>{{ meta_title }}</title>
+    	<title>{% if flatpage.title %}{{ flatpage.title }} - {% endif %}{% if meta_title %}{{ meta_title }}{% else %}ПЕРУНИЦА{% endif %}</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="description" content="{{ meta_description }}">
 		<meta name="keywords" content="{{ meta_keywords }}">
