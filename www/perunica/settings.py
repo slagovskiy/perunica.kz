@@ -15,7 +15,6 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
 
     'perunica.utils',
-    'perunica.apps.global',
     'perunica.apps.shop',
     'perunica.apps.banner',
 )
@@ -30,7 +29,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
      'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'perunica.apps.global.middleware.GlobalsMiddleware',
+    'perunica.utils.middleware.GlobalsMiddleware',
 )
 
 ROOT_URLCONF = 'perunica.urls'
