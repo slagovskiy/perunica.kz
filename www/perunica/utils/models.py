@@ -1,4 +1,6 @@
 from django.db import models
+import uuid
+import os
 
 
 class Global(models.Model):
@@ -25,3 +27,23 @@ class Image(models.Model):
 
     def __str__(self):
         return self.name
+
+    def code(self):
+        return '<img src="' + self.image.url + '" />'
+
+    def admin_image_list(self):
+        if self.image:
+            return '<img style="max-height: 32px;" src="' + self.image.url + '" />'
+        else:
+            return ''
+
+    def admin_image(self):
+        if self.image:
+            return '<img src="' + self.image.url + '" />'
+        else:
+            return ''
+
+    admin_image_list.allow_tags = True
+    admin_image_list.short_description = u'Image'
+    admin_image.allow_tags = True
+    admin_image.short_description = u'Image'
