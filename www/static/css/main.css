@@ -743,16 +743,16 @@ a.logo {
 	border:2px solid #D3D3D3;
 	width:376px;
 	padding:4px 10px;
-	height:224px;
+	height:230px;
 	background:#ffffff;
 }
 .cart .form select {
     width: 238px;
+    margin-top: 5px;
 }
 .cart .form .f1 select {
 	border:2px solid #D3D3D3;
-	width:262px;
-	padding:4px 10px;	
+	padding:4px 10px;
 	background:#ffffff;
 }
 .cart .form .f1 input.error,.cart .form textarea.error {
