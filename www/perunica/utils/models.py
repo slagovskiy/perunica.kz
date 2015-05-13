@@ -10,3 +10,18 @@ class Global(models.Model):
 
     def __str__(self):
         return self.meta_title
+
+
+class Image(models.Model):
+    name = models.CharField(max_length=256, default='', verbose_name=u'Image name')
+    def upload_to(instance, filename):
+        ext = filename.split('.')[-1]
+        if instance.pk:
+            filename = '{}.{}'.format(instance.pk, ext)
+        else:
+            filename = '{}.{}'.format(str(uuid.uuid1()), ext)
+        return os.path.join('images', filename)
+    image = models.ImageField(upload_to=upload_to, null=True, verbose_name=u'Image')
+
+    def __str__(self):
+        return self.name

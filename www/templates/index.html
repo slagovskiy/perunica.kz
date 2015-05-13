@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {{ request.session.first_page_text | safe }}
+    {{ content | safe }}
 
     {% if goods %}
         <div class="items" data-show="1">
