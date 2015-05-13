@@ -1,6 +1,7 @@
 import logging
 from django.shortcuts import render
 from perunica.apps.shop.models import Menu, SubMenu, Goods, GoodsGroup, GoodsLinkGroup
+from perunica.utils.models import Global
 from django.http import HttpResponse
 import uuid
 
@@ -84,6 +85,11 @@ def basket_data(request):
             request.session['basket'] = []
         order = []
         total_summ = 0
+        gl = Global.objects.filter(active=True)
+        if len(gl) > 0:
+            gl = gl[0]
+        else:
+            gl = Global.objects.create()
         for item in request.session['basket']:
             summ = 0
             g = Goods.objects.get(id=item['id'])
@@ -106,9 +112,14 @@ def basket_data(request):
             tmp['summ'] = summ
             total_summ += summ
             order.append(tmp)
+        if total_summ >= gl.order_min_sum:
+            next_step = True
+        else:
+            next_step = False
         context = {
             'order': order,
-            'total_summ': total_summ
+            'total_summ': total_summ,
+            'next_step': next_step
         }
     except:
         context = {}
