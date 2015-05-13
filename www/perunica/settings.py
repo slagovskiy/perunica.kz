@@ -15,6 +15,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
 
     'perunica.utils',
+    'perunica.apps.global',
     'perunica.apps.shop',
     'perunica.apps.banner',
 )
