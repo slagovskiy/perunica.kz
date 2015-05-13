@@ -1,3 +1,4 @@
+{% if order %}
     <div class="cart cartfull">
         <h1>
             <b>Ваш заказ</b>
@@ -44,3 +45,7 @@
             <div class="clear"></div>
         </div>
     </div>
+{% else %}
+<div class="noorder">Ваш заказ пуст.</div>
+<div class="clear"></div>
+{% endif %}
