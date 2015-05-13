@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^$', 'perunica.views.index', name='home'),
     url(r'^shop/', include('perunica.apps.shop.urls')),
 
+    url(r'^pages/', include('django.contrib.flatpages.urls')),
+
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
         'document_root': MEDIA_ROOT,
     }),
