@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2 style="text-align: center">Скоро открытие!</h2>
+    {{ request.session.first_page_text | safe }}
 
     {% if goods %}
         <div class="items" data-show="1">

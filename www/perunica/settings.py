@@ -30,6 +30,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
      'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'perunica.apps.global.middleware.GlobalsMiddleware',
 )
 
 ROOT_URLCONF = 'perunica.urls'

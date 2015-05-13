@@ -2,10 +2,10 @@
 {% load widgets %}
 <html>
 	<head>
-    	<title>{% if flatpage.title %}{{ flatpage.title }} - {% endif %}{% if meta_title %}{{ meta_title }}{% else %}ПЕРУНИЦА{% endif %}</title>
+    	<title>{% if flatpage.title %}{{ flatpage.title }} - {% endif %}{% if request.session.meta_title %}{{ request.session.meta_title }}{% else %}ПЕРУНИЦА{% endif %}</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<meta name="description" content="{{ meta_description }}">
-		<meta name="keywords" content="{{ meta_keywords }}">
+		<meta name="description" content="{{ request.session.meta_description }}">
+		<meta name="keywords" content="{{ request.session.meta_keywords }}">
         <link rel="shortcut icon" href="{% static 'favicon.ico' %}" title="Перуница" type="image/x-icon" />
         <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
