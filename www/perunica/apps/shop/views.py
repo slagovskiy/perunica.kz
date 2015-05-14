@@ -96,8 +96,8 @@ def basket_confirm(request):
             request.session['fio'] = request.GET['fio']
         if('phone' in request.GET):
             request.session['phone'] = request.GET['phone']
-        if('city' in request.GET):
-            request.session['city'] = request.GET['city']
+        if('email' in request.GET):
+            request.session['email'] = request.GET['email']
         if('payment' in request.GET):
             request.session['payment'] = request.GET['payment']
         if('address' in request.GET):

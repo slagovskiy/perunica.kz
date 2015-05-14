@@ -47,17 +47,13 @@ function load_basket_confirm(){
         ok = false;
         msg_error("", "Укажите свой телефон.");
     }
-    if ($('#basket_city').val() == '') {
-        ok = false;
-        msg_error("", "Укажите свой город.");
-    }
     if ($('#basket_address').val() == '') {
         ok = false;
         msg_error("", "Укажите свой адрес.");
     }
     if(ok) {
         $.ajax({
-            url: '/shop/basket/confirm/?fio=' + $('#basket_fio').val() + '&phone=' + $('#basket_phone').val() + '&city=' + $('#basket_city').val() + '&address=' + $('#basket_address').val() + '&payment=' + $('#basket_payment').val(),
+            url: '/shop/basket/confirm/?fio=' + $('#basket_fio').val() + '&phone=' + $('#basket_phone').val() + '&email=' + $('#basket_email').val() + '&address=' + $('#basket_address').val() + '&payment=' + $('#basket_payment').val(),
             cache: false,
             success: function (data) {
                 $('#cart_data').html(data);

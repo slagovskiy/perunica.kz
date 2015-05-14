@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 import uuid
 import os
@@ -150,3 +151,53 @@ class Goods(models.Model):
 class GoodsLinkGroup(models.Model):
     group = models.OneToOneField(GoodsGroup)
     goods = models.ManyToManyField(Goods)
+
+
+class Order(models.Model):
+    CASHE_PAYMENT = 1
+    CARD_PAYMENT = 2
+
+    PAYMENT_CHOICES = (
+        (CASHE_PAYMENT, 'Наличные'),
+        (CARD_PAYMENT, 'Карта'),
+    )
+
+    deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
+    fio = models.CharField(max_length=255, default=u'', verbose_name=u'Name')
+    phone = models.CharField(max_length=255, default=u'', verbose_name=u'Phone')
+    email = models.CharField(max_length=255, default=u'', verbose_name=u'Phone')
+    address = models.CharField(max_length=255, default=u'', verbose_name=u'Address')
+    payment = models.SmallIntegerField(verbose_name=u'Payment', choices=PAYMENT_CHOICES, default=CASHE_PAYMENT)
+    date = models.DateTimeField(auto_now=True, verbose_name=u'Added')
+
+
+class OrderBody(models.Model):
+    deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
+    order = models.ForeignKey(Order)
+    goods = models.ForeignKey(Goods)
+    option1 = models.ForeignKey(Goods, blank=True, related_name='o1')
+    option2 = models.ForeignKey(Goods, blank=True, related_name='o2')
+    option3 = models.ForeignKey(Goods, blank=True, related_name='o3')
+    price = models.FloatField(default=0, verbose_name=u'Price')
+    count = models.FloatField(default=0, verbose_name=u'Count')
+    change = models.DateTimeField(auto_now=True, verbose_name=u'Last change')
+    user = models.ForeignKey(User, blank=True, null=True, verbose_name=u'User')
+
+
+class OrderHistory(models.Model):
+    NEW_STATUS = 1
+    WORK_STATUS = 2
+    SEND_STATUS = 3
+    DONE_STATUS = 4
+
+    STATUS_CHOICES = (
+        (NEW_STATUS, 'Новый'),
+        (WORK_STATUS, 'Готовится'),
+        (SEND_STATUS, 'Доставляется'),
+        (DONE_STATUS, 'Выдан'),
+    )
+
+    order = models.ForeignKey(Order)
+    status = models.SmallIntegerField(verbose_name=u'Status', choices=STATUS_CHOICES, default=NEW_STATUS)
+    change = models.DateTimeField(auto_now=True, verbose_name=u'Last change')
+    user = models.ForeignKey(User, blank=True, null=True, verbose_name=u'User')
