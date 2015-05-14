@@ -5,11 +5,11 @@
     </h1>
     <div class="txt">
         <div class="lines">
-            <div>3 позиции на сумму 885 руб.</div>
-            <div>Способ оплаты: Наличными</div>
-            <div>Ваше имя: gsdg</div>
-            <div>Телефон: sdt346</div>
-            <div>Доставка будет осуществлена по адресу: sdhsdh екншнеолшлкеншкншекн</div>
+            <div>{{ request.session.order_len }} позиции на сумму {{ request.session.total_sum }} тнг.</div>
+            <div>Способ оплаты: {% ifequal request.session.payment "1" %}Наличными{% else %}Картой{% endifequal %}</div>
+            <div>Ваше имя: {{ request.session.fio }}</div>
+            <div>Телефон: {{ request.session.phone }}</div>
+            <div>Доставка будет осуществлена по адресу: {{ request.session.address }}</div>
             <button type="button" class="butt" onclick="cart_confirm($(this))">Отправить заказ</button>
             <input type="hidden" name="fio" value="gsdg">
             <input type="hidden" name="phone" value="sdt346">
