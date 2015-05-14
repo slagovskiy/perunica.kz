@@ -148,6 +148,8 @@ def basket_data(request):
             next_step = True
         else:
             next_step = False
+        request.session['total_sum'] = total_summ
+        request.session['order_len'] = len(order)
         context = {
             'order': order,
             'total_summ': total_summ,

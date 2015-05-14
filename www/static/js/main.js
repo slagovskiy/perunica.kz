@@ -57,7 +57,7 @@ function load_basket_confirm(){
     }
     if(ok) {
         $.ajax({
-            url: '/shop/basket/confirm/?fio=' + $('#basket_fio').val() + '&phone=' + $('#basket_phone').val() + '&city=' + $('#basket_city').val() + '&address=' + $('#basket_address').val(),
+            url: '/shop/basket/confirm/?fio=' + $('#basket_fio').val() + '&phone=' + $('#basket_phone').val() + '&city=' + $('#basket_city').val() + '&address=' + $('#basket_address').val() + '&payment=' + $('#basket_payment').val(),
             cache: false,
             success: function (data) {
                 $('#cart_data').html(data);
