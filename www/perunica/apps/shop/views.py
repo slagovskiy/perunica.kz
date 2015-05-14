@@ -1,8 +1,10 @@
 import logging
 from django.shortcuts import render
-from perunica.apps.shop.models import Menu, SubMenu, Goods, GoodsGroup, GoodsLinkGroup
+from perunica.apps.shop.models import Menu, SubMenu, Goods, GoodsGroup, GoodsLinkGroup, Order, OrderBody, OrderHistory
 from perunica.utils.models import Global
+from django.contrib.auth.models import User, AnonymousUser
 from django.http import HttpResponse
+from django.db import transaction
 import uuid
 
 log = logging.getLogger(__name__)
@@ -300,6 +302,33 @@ def basket_clear(request):
     except:
         context = {}
         log.error('Error basket_clear')
+        return HttpResponse('error')
+
+
+def basket_save(request):
+    sid = transaction.savepoint()
+    try:
+        order = Order.objects.create(
+            fio = request.session['fio'],
+            phone = request.session['phone'],
+            email = request.session['email'],
+            address = request.session['address'],
+            payment = request.session['payment']
+        )
+        order.save()
+
+        order_history = OrderHistory.objects.create(
+            order = order,
+            status = 1,
+            user = AnonymousUser
+        )
+        order_history.save()
+
+        transaction.savepoint_commit(sid)
+        return HttpResponse('ok')
+    except:
+        transaction.savepoint_rollback(sid)
+        log.exception('Error save order')
         return HttpResponse('error')
 
 
