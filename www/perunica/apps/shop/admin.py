@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.forms import SelectMultiple
 from django.db import models
-from .models import Menu, SubMenu, Unit, Goods, GoodsGroup, GoodsLinkGroup
+from .models import Menu, SubMenu, Unit, Goods, GoodsGroup, GoodsLinkGroup, Order, OrderBody, OrderHistory
 
 
 class MenuAdmin(admin.ModelAdmin):
@@ -53,8 +53,21 @@ class GoodsGroupAdmin(admin.ModelAdmin):
     ]
 
 
+class OrderBodyInLine(admin.StackedInline):
+    model = OrderBody
+
+
+class OrderAdmin(admin.ModelAdmin):
+    ordering = ['date']
+    list_display = ['date', 'fio', 'phone']
+    inlines = [
+        OrderBodyInLine
+    ]
+
+
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(SubMenu, SubMenuAdmin)
 admin.site.register(Unit, UnitAdmin)
 admin.site.register(Goods, GoodsAdmin)
 admin.site.register(GoodsGroup, GoodsGroupAdmin)
+admin.site.register(Order, OrderAdmin)
