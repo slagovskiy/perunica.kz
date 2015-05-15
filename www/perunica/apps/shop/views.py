@@ -342,7 +342,7 @@ def basket_save(request):
 
         order_history = OrderHistory.objects.create(
             order=order,
-            status=1
+            status=OrderHistory.NEW_STATUS
         )
         order_history.save()
 
@@ -360,12 +360,18 @@ def basket_save(request):
                 log.warn(tmp_option)
                 if option_i == 1:
                     order_body.option1 = tmp_option
+                    order_body.price_o1 = tmp_option.price
+                    order_body.count_o1 = _item['count']
                     option_i += 1
-                if option_i == 2:
+                elif option_i == 2:
                     order_body.option2 = tmp_option
+                    order_body.price_o2 = tmp_option.price
+                    order_body.count_o2 = _item['count']
                     option_i += 1
-                if option_i == 3:
+                elif option_i == 3:
                     order_body.option3 = tmp_option
+                    order_body.price_o3 = tmp_option.price
+                    order_body.count_o3 = _item['count']
                     option_i += 1
             order_body.save()
 
