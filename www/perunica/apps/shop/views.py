@@ -113,6 +113,17 @@ def basket_confirm(request):
     return render(request, 'shop/basket_confirm.html', context)
 
 
+def basket_ok(request):
+    try:
+        if 'basket' not in request.session:
+            request.session['basket'] = []
+        context = {}
+    except:
+        context = {}
+        log.exception('Error get_basket')
+    return render(request, 'shop/basket_ok.html', context)
+
+
 def basket_data(request):
     try:
         if 'basket' not in request.session:
@@ -305,25 +316,60 @@ def basket_clear(request):
         return HttpResponse('error')
 
 
+@transaction.atomic
 def basket_save(request):
     sid = transaction.savepoint()
     try:
+        if 'basket' not in request.session:
+            log.warn('no basket')
+            transaction.savepoint_rollback(sid)
+            return HttpResponse('error')
+
+        if request.session['basket'] == []:
+            log.warn('basket is empty')
+            transaction.savepoint_rollback(sid)
+            return HttpResponse('error')
+
         order = Order.objects.create(
-            fio = request.session['fio'],
-            phone = request.session['phone'],
-            email = request.session['email'],
-            address = request.session['address'],
-            payment = request.session['payment']
+            fio=request.session['fio'],
+            phone=request.session['phone'],
+            email=request.session['email'],
+            address=request.session['address'],
+            payment=request.session['payment'],
+            uuid=uuid.uuid1().hex
         )
         order.save()
 
         order_history = OrderHistory.objects.create(
-            order = order,
-            status = 1,
-            user = AnonymousUser
+            order=order,
+            status=1
         )
         order_history.save()
 
+        for item in request.session['basket']:
+            tmp_goods = Goods.objects.get(id=item['id'])
+            order_body = OrderBody.objects.create(
+                order=order,
+                goods=tmp_goods,
+                price=float(item['price']),
+                count=float(item['count'])
+            )
+            option_i = 1
+            for _item in item['option']:
+                tmp_option = Goods.objects.get(id=_item['id'])
+                log.warn(tmp_option)
+                if option_i == 1:
+                    order_body.option1 = tmp_option
+                    option_i += 1
+                if option_i == 2:
+                    order_body.option2 = tmp_option
+                    option_i += 1
+                if option_i == 3:
+                    order_body.option3 = tmp_option
+                    option_i += 1
+            order_body.save()
+
+        request.session['basket'] = []
         transaction.savepoint_commit(sid)
         return HttpResponse('ok')
     except:

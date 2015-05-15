@@ -10,15 +10,7 @@
             <div>Ваше имя: {{ request.session.fio }}</div>
             <div>Телефон: {{ request.session.phone }}</div>
             <div>Доставка будет осуществлена по адресу: {{ request.session.address }}</div>
-            <button type="button" class="butt" onclick="cart_confirm($(this))">Отправить заказ</button>
-            <input type="hidden" name="fio" value="gsdg">
-            <input type="hidden" name="phone" value="sdt346">
-            <input type="hidden" name="address" value="екншнеолшлкеншкншекн">
-            <input type="hidden" name="city" value="sdhsdh">
-            <input type="hidden" name="cardnum" value="0">
-            <input type="hidden" name="persons" value="1">
-            <input type="hidden" name="tools" value="0">
-            <input type="hidden" name="payment" value="1">
+            <button type="button" class="butt" onclick="cart_confirm()">Отправить заказ</button>
         </div>
         <div class="clear"></div>
     </div>

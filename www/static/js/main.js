@@ -232,6 +232,23 @@ function cart_add_good(id){
     });
 }
 
+function cart_confirm(){
+    $.ajax({
+        url: '/shop/basket/save/',
+        cache: false,
+        success: function(data){
+            if(data=='ok')
+            {
+                update_basket();
+                location.href = '/shop/basket/ok/';
+            }
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка сохранения корзины.");
+        }
+    });
+}
+
 
 
 $(window.document).ready(function() {
