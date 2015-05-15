@@ -163,12 +163,14 @@ class Order(models.Model):
     )
 
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
+    uuid = models.CharField(max_length=80, default=u'', verbose_name=u'UUID')
     fio = models.CharField(max_length=255, default=u'', verbose_name=u'Name')
     phone = models.CharField(max_length=255, default=u'', verbose_name=u'Phone')
     email = models.CharField(max_length=255, default=u'', verbose_name=u'Phone')
     address = models.CharField(max_length=255, default=u'', verbose_name=u'Address')
     payment = models.SmallIntegerField(verbose_name=u'Payment', choices=PAYMENT_CHOICES, default=CASHE_PAYMENT)
     date = models.DateTimeField(auto_now=True, verbose_name=u'Added')
+    sended = models.BooleanField(default=False, verbose_name=u'Sended')
 
 
 class OrderBody(models.Model):
