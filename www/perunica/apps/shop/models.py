@@ -172,6 +172,26 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now=True, verbose_name=u'Added')
     sended = models.BooleanField(default=False, verbose_name=u'Sended')
 
+    def number(self):
+        return '%06d' % self.id
+
+    def status(self):
+        return self.orderhistory_set.all().last()
+
+    def added(self):
+        return self.date.strftime('%Y/%m/%d %H:%M:%S')
+
+    def summ(self):
+        s = 0
+        for item in self.orderbody_set.all():
+            s += item.price * item.count
+            if item.option1:
+                s += item.price_o1 * item.count_o1
+            if item.option2:
+                s += item.price_o2 * item.count_o2
+            if item.option3:
+                s += item.price_o3 * item.count_o3
+        return s
 
 class OrderBody(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
@@ -181,7 +201,13 @@ class OrderBody(models.Model):
     option2 = models.ForeignKey(Goods, blank=True, null=True, related_name='o2')
     option3 = models.ForeignKey(Goods, blank=True, null=True, related_name='o3')
     price = models.FloatField(default=0, verbose_name=u'Price')
+    price_o1 = models.FloatField(default=0, verbose_name=u'Price option 1')
+    price_o2 = models.FloatField(default=0, verbose_name=u'Price option 2')
+    price_o3 = models.FloatField(default=0, verbose_name=u'Price option 3')
     count = models.FloatField(default=0, verbose_name=u'Count')
+    count_o1 = models.FloatField(default=0, verbose_name=u'Count option 1')
+    count_o2 = models.FloatField(default=0, verbose_name=u'Count option 2')
+    count_o3 = models.FloatField(default=0, verbose_name=u'Count option 3')
     change = models.DateTimeField(auto_now=True, verbose_name=u'Last change')
     user = models.ForeignKey(User, blank=True, null=True, verbose_name=u'User')
 
@@ -203,3 +229,6 @@ class OrderHistory(models.Model):
     status = models.SmallIntegerField(verbose_name=u'Status', choices=STATUS_CHOICES, default=NEW_STATUS)
     change = models.DateTimeField(auto_now=True, verbose_name=u'Last change')
     user = models.ForeignKey(User, blank=True, null=True, verbose_name=u'User')
+
+    def __str__(self):
+        return self.STATUS_CHOICES[self.status - 1][1]
