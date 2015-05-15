@@ -118,7 +118,7 @@ def basket_ok(request):
         if 'basket' not in request.session:
             request.session['basket'] = []
         context = {}
-
+        '''
         import smtplib
         from django.core.mail import EmailMultiAlternatives
         from email.mime.multipart import MIMEMultipart
@@ -143,6 +143,7 @@ def basket_ok(request):
                 msg.send()
             except:
                 log.exception('Error send message')
+        '''
     except:
         context = {}
         log.exception('Error get_basket')
