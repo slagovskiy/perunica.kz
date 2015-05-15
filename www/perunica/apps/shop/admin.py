@@ -61,8 +61,8 @@ class OrderHistoryLine(admin.StackedInline):
     model = OrderHistory
 
 class OrderAdmin(admin.ModelAdmin):
-    ordering = ['date']
-    list_display = ['number', 'status', 'summ', 'added', 'fio', 'phone']
+    ordering = ['-date']
+    list_display = ['number', 'status', 'summ', 'added', 'fio', 'phone', 'sended']
     inlines = [
         OrderBodyInLine,
         OrderHistoryLine
