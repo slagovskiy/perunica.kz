@@ -118,6 +118,31 @@ def basket_ok(request):
         if 'basket' not in request.session:
             request.session['basket'] = []
         context = {}
+
+        import smtplib
+        from django.core.mail import EmailMultiAlternatives
+        from email.mime.multipart import MIMEMultipart
+        from email.mime.text import MIMEText
+
+        from django.core.mail import send_mail
+        from django.template import loader, Context
+
+        from perunica.apps.manager.models import User
+        from perunica.settings import EMAIL_SUBJECT_PREFIX, DEFAULT_FROM_EMAIL
+
+        for u in User.objects.all().filter(deleted=False):
+            try:
+                c = Context({})
+                subject = u'Новый заказ'
+                from_email = EMAIL_SUBJECT_PREFIX + ' <' + DEFAULT_FROM_EMAIL + '>'
+                to = u.email
+                text_content = loader.get_template('shop/email_order_text.html').render(c)
+                html_content = loader.get_template('shop/email_order_html.html').render(c)
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+            except:
+                log.exception('Error send message')
     except:
         context = {}
         log.exception('Error get_basket')
