@@ -1,1 +1,23 @@
-TEST TEST TEST
+{% load mathitils %}
+{% if order %}
+Новый заказ: {{ order.number }}
+Добавлен: {{ order.added }}
+==========================================
+Клиент: {{ order.fio }}
+Телефон: {{ order.phone }}
+Email: {{ order.email }}
+Адрес доставки: {{ order.address }}
+
+==============================================================
+Наименование                       | Количество | Цена | Сумма
+==============================================================
+    {% for item in order.orderbody_set.all %}
+{{ item.goods.menu.name }}: {{ item.goods.name }} | {{ item.count }} | {{ item.price }} тнг. | {{ item.count | fmul:item.price }} тнг.
+        {% if item.option1 %}{{ item.option1.menu.name }}: {{ item.option1.name }} | {{ item.count_o1 }} | {{ item.price_o1 }} тнг. | {{ item.count_o1 | fmul:item.price_o1 }} тнг.{% endif %}
+        {% if item.option2 %}{{ item.option2.menu.name }}: {{ item.option2.name }} | {{ item.count_o2 }} | {{ item.price_o2 }} тнг. | {{ item.count_o2 | fmul:item.price_o2 }} тнг.{% endif %}
+        {% if item.option3 %}{{ item.option3.menu.name }}: {{ item.option3.name }} | {{ item.count_o3 }} | {{ item.price_o3 }} тнг. | {{ item.count_o3 | fmul:item.price_o3 }} тнг.{% endif %}
+    {% endfor %}
+Итого:           {{ order.summ }} тнг.
+
+Открыть заказ: {{ order.get_manager_url }}
+{% endif %}
