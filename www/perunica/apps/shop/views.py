@@ -2,6 +2,10 @@ import logging
 from django.shortcuts import render
 from perunica.apps.shop.models import Menu, SubMenu, Goods, GoodsGroup, GoodsLinkGroup, Order, OrderBody, OrderHistory
 from perunica.utils.models import Global
+from perunica.apps.manager.models import User as UserManager
+from perunica.settings import EMAIL_SUBJECT_PREFIX, DEFAULT_FROM_EMAIL
+from django.core.mail import EmailMultiAlternatives
+from django.template import loader, Context
 from django.contrib.auth.models import User, AnonymousUser
 from django.http import HttpResponse
 from django.db import transaction
@@ -118,32 +122,6 @@ def basket_ok(request):
         if 'basket' not in request.session:
             request.session['basket'] = []
         context = {}
-        '''
-        import smtplib
-        from django.core.mail import EmailMultiAlternatives
-        from email.mime.multipart import MIMEMultipart
-        from email.mime.text import MIMEText
-
-        from django.core.mail import send_mail
-        from django.template import loader, Context
-
-        from perunica.apps.manager.models import User
-        from perunica.settings import EMAIL_SUBJECT_PREFIX, DEFAULT_FROM_EMAIL
-
-        for u in User.objects.all().filter(deleted=False):
-            try:
-                c = Context({})
-                subject = u'Новый заказ'
-                from_email = EMAIL_SUBJECT_PREFIX + ' <' + DEFAULT_FROM_EMAIL + '>'
-                to = u.email
-                text_content = loader.get_template('shop/email_order_text.html').render(c)
-                html_content = loader.get_template('shop/email_order_html.html').render(c)
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
-            except:
-                log.exception('Error send message')
-        '''
     except:
         context = {}
         log.exception('Error get_basket')
@@ -383,7 +361,6 @@ def basket_save(request):
             option_i = 1
             for _item in item['option']:
                 tmp_option = Goods.objects.get(id=_item['id'])
-                log.warn(tmp_option)
                 if option_i == 1:
                     order_body.option1 = tmp_option
                     order_body.price_o1 = tmp_option.price
@@ -400,6 +377,20 @@ def basket_save(request):
                     order_body.count_o3 = _item['count']
                     option_i += 1
             order_body.save()
+
+        for u in UserManager.objects.all().filter(deleted=False):
+            try:
+                c = Context({'order': order})
+                subject = u'Новый заказ #' + order.number() + ' на сумму ' + str(order.summ()) + ' тнг.'
+                from_email = EMAIL_SUBJECT_PREFIX + ' <' + DEFAULT_FROM_EMAIL + '>'
+                to = u.email
+                text_content = loader.get_template('shop/email_order_text.html').render(c)
+                html_content = loader.get_template('shop/email_order_html.html').render(c)
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+            except:
+                log.exception('Error send message')
 
         request.session['basket'] = []
         transaction.savepoint_commit(sid)
