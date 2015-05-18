@@ -1,3 +1,81 @@
-<h1>test</h1>
-<h2>test</h2>
-<h3>test</h3>
+{% load mathitils %}
+{% if order %}
+    <table>
+    <tr><td><h1>Новый заказ: {{ order.number }}</h1></td></tr>
+    <tr><td><div style="font-size: 10px; text-align: right;">Добавлен: {{ order.added }}</div></td></tr>
+    </table>
+    <hr>
+    <table>
+        <tr>
+            <td style="padding: 5px;">Клиент</td>
+            <td style="padding: 5px;">{{ order.fio }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">Телефон</td>
+            <td style="padding: 5px;">{{ order.phone }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">Email</td>
+            <td style="padding: 5px;">{{ order.email }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">Адрес доставки</td>
+            <td style="padding: 5px;">{{ order.address }}</td>
+        </tr>
+    </table>
+    <table><tr><td style="background-color: #444444;">
+    <table>
+        <tr style="">
+            <td style="text-align: center; background-color: #FFFFFF; padding: 5px;">Наименование</td>
+            <td style="text-align: center; background-color: #FFFFFF; padding: 5px;">Количество</td>
+            <td style="text-align: center; background-color: #FFFFFF; padding: 5px;">Цена</td>
+            <td style="text-align: center; background-color: #FFFFFF; padding: 5px;">Сумма</td>
+        </tr>
+    {% for item in order.orderbody_set.all %}
+        <tr>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.goods.menu.name }}: {{ item.goods.name }}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.count }}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.price }} тнг.</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.count | fmul:item.price }} тнг.</td>
+        </tr>
+        {% if item.option1 %}
+        <tr>
+            <td style="background-color: #FFFFFF; padding: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.option1.menu.name }}: {{ item.option1.name }}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.count_o1 }}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.price_o1 }} тнг.</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.count_o1 | fmul:item.price_o1 }} тнг.</td>
+        </tr>
+        {% endif %}
+        {% if item.option2 %}
+        <tr>
+            <td style="background-color: #FFFFFF; padding: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.option2.menu.name }}: {{ item.option2.name }}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.count_o2 }}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.price_o2 }} тнг.</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.count_o2 | fmul:item.price_o2 }} тнг.</td>
+        </tr>
+        {% endif %}
+        {% if item.option3 %}
+        <tr>
+            <td style="background-color: #FFFFFF; padding: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.option3.menu.name }}: {{ item.option3.name }}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.count_o3 }}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.price_o3 }} тнг.</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ item.count_o3 | fmul:item.price_o3 }} тнг.</td>
+        </tr>
+        {% endif %}
+        {% if not forloop.last %}
+        <tr>
+            <td colspan="4" style="background-color: #FFFFFF;"></td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+        <tr>
+            <td colspan="4" style="background-color: #FFFFFF;"></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="background-color: #FFFFFF; padding: 5px;">Итого</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ order.summ }} тнг.</td>
+        </tr>
+    </table>
+    </td></tr></table>
+    <div><a href="{{ order.get_manager_url }}">Открыть заказ</a></div>
+{% endif %}
