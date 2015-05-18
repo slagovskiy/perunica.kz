@@ -108,13 +108,15 @@ DATABASES = {
 
 
 # email
-DEFAULT_FROM_EMAIL = 'noreply@server.com'
+DEFAULT_FROM_EMAIL = 'noreply@perunica.kz'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.server.com'
-EMAIL_PORT = '25'
-EMAIL_HOST_USER = 'noreply@server.com'
-EMAIL_HOST_PASSWORD = '123qwe'
-EMAIL_SUBJECT_PREFIX = 'qwertyuiop.com'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'noreply@perunica.kz'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_SUBJECT_PREFIX = 'perunica.kz'
 
 # debug toolbar
 DEBUG_TOOLBAR_PANELS = (
