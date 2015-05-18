@@ -233,6 +233,8 @@ function cart_add_good(id){
 }
 
 function cart_confirm(){
+    $('#basket_confirm').hide();
+    $('#basket_loader').show();
     $.ajax({
         url: '/shop/basket/save/',
         cache: false,

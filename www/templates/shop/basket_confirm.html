@@ -1,3 +1,4 @@
+{% load static %}
 <div class="cart">
     <h1><span style="cursor:pointer" onclick="load_basket_data()">Ваш заказ</span>
         <span style="cursor:pointer" onclick="load_basket_delivery()">Адрес</span>
@@ -10,7 +11,8 @@
             <div>Ваше имя: {{ request.session.fio }}</div>
             <div>Телефон: {{ request.session.phone }}</div>
             <div>Доставка будет осуществлена по адресу: {{ request.session.address }}</div>
-            <button type="button" class="butt" onclick="cart_confirm()">Отправить заказ</button>
+            <button type="button" class="butt" onclick="cart_confirm()" id="basket_confirm">Отправить заказ</button>
+            <div style="float: right; margin-top: 26px; display: none;" id="basket_loader"><img src="{% static 'img/ajax-loader.gif' %}"></div>
         </div>
         <div class="clear"></div>
     </div>
