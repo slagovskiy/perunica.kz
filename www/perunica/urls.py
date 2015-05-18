@@ -8,6 +8,7 @@ admin.site.site_header = 'ПЕРУНИЦА - Администрирование'
 urlpatterns = [
     url(r'^$', 'perunica.views.index', name='home'),
     url(r'^shop/', include('perunica.apps.shop.urls')),
+    url(r'^manager/', include('perunica.apps.manager.urls')),
 
     url(r'^pages/', include('django.contrib.flatpages.urls')),
 

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+#container {
+  width: 28em;
+  min-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+</style>
+<div class="rsection_t .login">
+<div id="container">
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name" style="font-size: 16px; text-align: center;"><a href="/manager/login/">Вход для менеджера</a></h1>
+        </div>
+    </div>
+    <div id="content" style="padding: 10px;">
+        <form action="/manager/login/" method="post" id="login-form">
+            <input type="hidden" name="csrfmiddlewaretoken" value="UsGOnQ35tTPdkKdFkzJVj5F0WcXqR9KH">
+            <div style="padding-bottom: 10px;">
+                <div style="padding-bottom: 7px;">Username:</div><input id="username" name="username" type="text" style="width: 100%; padding: 5px;">
+            </div>
+            <div style="padding-bottom: 10px;">
+                <div style="padding-bottom: 7px;">Password:</div><input id="password" name="password" type="password" style="width: 100%; padding: 5px;">
+            </div>
+            <div style="text-align: center; padding-top: 10px;">
+                <input type="submit" value="Log in">
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}
