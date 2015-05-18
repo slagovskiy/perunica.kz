@@ -193,6 +193,9 @@ class Order(models.Model):
                 s += item.price_o3 * item.count_o3
         return s
 
+    def get_manager_url(self):
+        return '/manager/order/' + str(self.id) + '/'
+
 class OrderBody(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     order = models.ForeignKey(Order)
