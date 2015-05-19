@@ -2,15 +2,17 @@
 
 {% block content %}
 <div class="rsection_t">
+<input type="hidden" value="1" id="page">
 <div id="order-table">
 </div>
+<div id="order-window" style="display: none;"></div>
 </div>
 
 
 <script type="text/javascript">
-function load_orders(desc){
+function load_orders(desc, page){
     $.ajax({
-        url: '/manager/orders/?desc=' + desc,
+        url: '/manager/orders/?desc=' + desc + '&page=' + page,
         cache: false,
         success: function(data){
             $('#order-table').html(data);
@@ -20,9 +22,35 @@ function load_orders(desc){
         }
     });
 }
-load_orders('-id');
+
+function order_open(id){
+    $.ajax({
+        url: '/manager/order/'+id+'/',
+        cache: false,
+        success: function(data){
+            $( "#order-window" ).html(data);
+            $(function() {
+                $( "#order-window" ).dialog({
+                    resizable: false,
+                    height:500,
+                    width: 600,
+                    modal: true,
+                    closeOnEscape: false,
+                    title: "Заказ"
+                });
+            });
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка загрузки данных.");
+        }
+    });
+}
+load_orders('-id', 1);
 </script>
 <style>
+#order-table td{
+    padding: 3px;
+}
 #order-table td a{
     text-decoration: none;
 }
@@ -32,6 +60,14 @@ load_orders('-id');
 }
 #order-table tr:hover{
     background-color: #dddddd;
+}
+.pagination{
+    padding-top: 20px;
+    font-size: 14px;
+}
+.pagination a{
+    text-decoration: none;
+    font-size: 20px;
 }
 </style>
 {% endblock %}

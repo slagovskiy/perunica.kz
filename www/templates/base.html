@@ -53,7 +53,7 @@
         {% widget_main_menu %}
 
         {% if request.session.manager %}
-            <div class="rsection_m">Менеджер: {{ request.session.manager.name }} | <a href="/manager/">Управление заказами</a> | <a href="/manager/logout/">Выйди</a></div>
+            <div class="rsection_m">Менеджер: {{ request.session.manager.name }} | <a href="/manager/">Управление заказами</a> | <a href="/manager/logout/">Выйти</a></div>
         {% endif %}
         {% if menu %}
             {% widget_sub_menu menu %}

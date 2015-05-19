@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Manager
 from perunica.apps.shop.models import Order
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import uuid
 
 log = logging.getLogger(__name__)
@@ -57,8 +58,16 @@ def order_table(request):
         if 'desc' in request.GET:
             desc = request.GET['desc']
         orders = Order.objects.all().order_by(desc)
+        paginator = Paginator(orders, 50)
+        tmp = paginator.page(1)
+        try:
+            tmp = paginator.page(request.GET['page'])
+            log.warn(request.GET['page'])
+        except:
+            pass
         context = {
-            'orders': orders
+            'orders': tmp,
+            'desc': desc
         }
     except:
         context = {}

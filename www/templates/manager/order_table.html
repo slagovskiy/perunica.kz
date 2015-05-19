@@ -8,7 +8,7 @@
             <td style="text-align: center">Статус</td>
         </tr>
     {% for order in orders %}
-        <tr>
+        <tr onclick="order_open({{ order.id }})">
             <td>{{ order.number }}</td>
             <td style="text-align: center;">{{ order.added }}</td>
             <td style="text-align: right;">{{ order.summ }}</td>
@@ -18,3 +18,19 @@
         </tr>
     {% endfor %}
     </table>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if orders.has_previous %}
+                <a onclick="load_orders('{{ desc }}', {{ orders.previous_page_number }})" style="cursor: pointer">&#8656;</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ orders.number }} из {{ orders.paginator.num_pages }}.
+            </span>
+
+            {% if orders.has_next %}
+                <a onclick="load_orders('{{ desc }}', {{ orders.next_page_number }})" style="cursor: pointer">&#8658;</a>
+            {% endif %}
+        </span>
+    </div>
