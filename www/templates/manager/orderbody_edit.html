@@ -1,0 +1,18 @@
+{% if orderbody %}
+    <div>
+    Блюдо<br>
+    <select style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" id="orderbody_id">
+        {% for item in goods %}
+        <option value="{{ item.id }}"{% ifequal orderbody.goods.id item.id %} selected{% endifequal %}>{{ item.menu.name }}: {{ item.name }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div>
+    Количество<br>
+    <input type="text" style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" value="{{ orderbody.count }}" id="orderbody_count">
+    </div>
+    <div>
+    Цена<br>
+    <input type="text" style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" value="{{ orderbody.price }}" id="orderbody_price">
+    </div>
+{% endif %}

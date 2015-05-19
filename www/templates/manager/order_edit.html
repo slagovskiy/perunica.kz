@@ -1,0 +1,55 @@
+{% load mathitils %}
+<style>
+.order-edit-row {
+    cursor: pointer;
+}
+</style>
+<input type="hidden" id="order-status" value="{{ order.orderhistory_set.all.last.status }}">
+<div style="font-size: 16px; padding-bottom: 0px;">Заказ: {{ order.number }}</div>
+<div style="font-size: 10px; padding-bottom: 10px;">добавлен: {{ order.added }}</div>
+<div style="font-size: 14px; padding-bottom: 5px;">Клиент: {{ order.fio }}</div>
+<div style="font-size: 14px; padding-bottom: 5px;">Контакты: {{ order.phone }}{% if order.email %},  {{ order.email }}{% endif %}</div>
+<div style="font-size: 16px; padding-bottom: 5px;">Адрес доствки: {{ order.address }}</div>
+<table style="width: 100%"><tr><td style="background-color: #DDDDDD;">
+<table width="100%">
+    <tr>
+        <td>Блюдо</td>
+        <td>Кол-во</td>
+        <td>Цена</td>
+        <td>Сумма</td>
+    </tr>
+    {% for item in order.orderbody_set.all %}
+        <tr class="order-edit-row" onclick="order_edit_goods({{ item.id }});">
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.goods.menu.name }}: {{ item.goods.name }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.count }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.price }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.price | mul:item.count }}</td>
+        </tr>
+        {% if item.option1 %}
+        <tr class="order-edit-row" onclick="order_edit_option({{ item.id }}, 1);">
+            <td style="padding: 1px; background-color: #FFFFFF;">&nbsp;&nbsp;&#8627;&nbsp;&nbsp;{{ item.option1.menu.name }}: {{ item.option1.name }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.count_o1 }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.price_o1 }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.price_o1 | mul:item.count_o1 }}</td>
+        </tr>
+        {% endif %}
+        {% if item.option2 %}
+        <tr class="order-edit-row" onclick="order_edit_option({{ item.id }}, 2);">
+            <td style="padding: 1px; background-color: #FFFFFF;">&nbsp;&nbsp;&#8627;&nbsp;&nbsp;{{ item.option2.menu.name }}: {{ item.option2.name }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.count_o2 }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.price_o2 }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.price_o2 | mul:item.count_o2 }}</td>
+        </tr>
+        {% endif %}
+        {% if item.option3 %}
+        <tr class="order-edit-row" onclick="order_edit_option({{ item.id }}, 3);">
+            <td style="padding: 1px; background-color: #FFFFFF;">&nbsp;&nbsp;&#8627;&nbsp;&nbsp;{{ item.option3.menu.name }}: {{ item.option3.name }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.count_o3 }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.price_o3 }}</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ item.price_o3 | mul:item.count_o3 }}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+</td></tr></table>
+<script>

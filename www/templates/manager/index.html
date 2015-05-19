@@ -3,9 +3,11 @@
 {% block content %}
 <div class="rsection_t">
 <input type="hidden" value="1" id="page">
+<input type="hidden" value="-id" id="desc">
 <div id="order-table">
 </div>
 <div id="order-window" style="display: none;"></div>
+<div id="order-window-edit" style="display: none;"></div>
 </div>
 
 
@@ -16,6 +18,8 @@ function load_orders(desc, page){
         cache: false,
         success: function(data){
             $('#order-table').html(data);
+            $('#page').val(page);
+            $('#desc').val(desc);
         },
         error: function(e, xhr){
             msg_error("", "Ошибка загрузки заказов.");
@@ -24,6 +28,11 @@ function load_orders(desc, page){
 }
 
 function order_open(id){
+    var s = [
+            'В готовку',
+            'В доставку',
+            'Выдано'
+    ]
     $.ajax({
         url: '/manager/order/'+id+'/',
         cache: false,
@@ -36,7 +45,22 @@ function order_open(id){
                     width: 600,
                     modal: true,
                     closeOnEscape: false,
-                    title: "Заказ"
+                    title: "Заказ",
+                    buttons: [
+                        {
+                        text: s[$('#order-status').val()-1],
+                        click: function() {
+                            $( this ).dialog( "close" );
+                            }
+                        },
+                        {
+                        text: "Закрыть",
+                        click: function() {
+                            load_orders($('#desc').val(), $('#page').val());
+                            $( this ).dialog( "close" );
+                            }
+                        }
+                    ]
                 });
             });
         },
@@ -45,6 +69,71 @@ function order_open(id){
         }
     });
 }
+
+function order_edit_goods(id){
+    $.ajax({
+        url: '/manager/orderbody/edit/'+id+'/',
+        cache: false,
+        success: function(data){
+            $( "#order-window-edit" ).html(data);
+            $(function() {
+                $( "#order-window-edit" ).dialog({
+                    resizable: false,
+                    height:280,
+                    width: 400,
+                    modal: true,
+                    closeOnEscape: false,
+                    title: "Редактирование",
+                    buttons: [
+                        {
+                        text: "Сохранить",
+                        click: function() {
+                            $.ajax({
+                                url: '/manager/orderbody/save/' + id + '/?id=' + $('#orderbody_id').val() + '&count=' + $('#orderbody_count').val() + '&price=' + $('#orderbody_price').val(),
+                                cache: false,
+                                success: function (data) {
+                                    if (data != 'error') {
+                                        $.ajax({
+                                            url: '/manager/order/' + data + '/',
+                                            cache: false,
+                                            success: function (data) {
+                                                $("#order-window").html(data);
+                                            },
+                                            error: function(e, xhr){
+                                                msg_error("", "Ошибка обновления данных.");
+                                            }
+                                        });
+                                    } else {
+                                        msg_error("", "Ошибка сохранения данных.");
+                                    }
+                                },
+                                error: function(e, xhr){
+                                    msg_error("", "Ошибка передачи данных.");
+                                }
+                            });
+                            $( this ).dialog( "close" );
+                            }
+                        },
+                        {
+                        text: "Закрыть",
+                        click: function() {
+                            $( this ).dialog( "close" );
+                            }
+                        },
+                    ]
+                });
+            });
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка загрузки данных.");
+        }
+    });
+}
+
+function order_edit_option(id, option){
+
+}
+
 load_orders('-id', 1);
 </script>
 <style>
@@ -68,6 +157,9 @@ load_orders('-id', 1);
 .pagination a{
     text-decoration: none;
     font-size: 20px;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: none !important;
 }
 </style>
 {% endblock %}

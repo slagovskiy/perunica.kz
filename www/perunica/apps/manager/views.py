@@ -2,7 +2,7 @@ import logging
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Manager
-from perunica.apps.shop.models import Order
+from perunica.apps.shop.models import Order, OrderBody, OrderHistory, Goods
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import uuid
 
@@ -37,7 +37,7 @@ def login(request):
         context = {}
     except:
         context = {}
-        log.exception('Error get_index')
+        log.exception('Error login')
     return render(request, 'manager/login.html', context)
 
 
@@ -48,7 +48,7 @@ def logout(request):
         context = {}
     except:
         context = {}
-        log.exception('Error get_index')
+        log.exception('Error logout')
     return render(request, 'manager/login.html', context)
 
 
@@ -71,7 +71,47 @@ def order_table(request):
         }
     except:
         context = {}
-        log.exception('Error get_index')
+        log.exception('Error order_table')
     return render(request, 'manager/order_table.html', context)
+
+
+def order_open(request, id):
+    try:
+        order = Order.objects.get(id=id)
+        context = {
+            'order': order
+        }
+    except:
+        context = {}
+        log.exception('Error order_edit')
+    return render(request, 'manager/order_edit.html', context)
+
+
+def orderbody_edit(request, id):
+    try:
+        orderbody = OrderBody.objects.get(id=id)
+        goods = Goods.objects.filter(deleted=False)
+        context = {
+            'orderbody': orderbody,
+            'goods': goods
+        }
+    except:
+        context = {}
+        log.exception('Error orderbosy_edit')
+    return render(request, 'manager/orderbody_edit.html', context)
+
+
+def orderbody_save(request, id):
+    try:
+        orderbody = OrderBody.objects.get(id=id)
+        goods = Goods.objects.get(id=request.GET['id'])
+        orderbody.goods = goods
+        orderbody.count = request.GET['count']
+        orderbody.price = request.GET['price']
+        orderbody.save()
+        return HttpResponse(orderbody.order.id)
+    except:
+        log.exception('Error orderbosy_edit')
+        return HttpResponse('error')
 
 
