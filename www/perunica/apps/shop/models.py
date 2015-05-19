@@ -236,4 +236,4 @@ class OrderHistory(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, verbose_name=u'User')
 
     def __str__(self):
-        return self.STATUS_CHOICES[self.status - 1][1]
+        return self.STATUS_CHOICES[self.status][1]

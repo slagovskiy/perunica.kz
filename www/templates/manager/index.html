@@ -68,6 +68,25 @@ function order_open(id){
                             }
                         },
                         {
+                        text: "Отменить",
+                        click: function() {
+                            $.ajax({
+                                url: '/manager/order/setstatus/' + id + '/?status=-1',
+                                cache: false,
+                                success: function(data){
+                                    if(data=='ok')
+                                        load_orders($('#desc').val(), $('#page').val());
+                                    else
+                                        msg_error("", "Ошибка сохранения статуса.");
+                                },
+                                error: function(e, xhr){
+                                    msg_error("", "Ошибка изменения статуса.");
+                                }
+                            });
+                            $( this ).dialog( "close" );
+                            }
+                        },
+                        {
                         text: "Печать",
                         click: function () {
                             window.open("/manager/order/" + id + "/?print=yes", "","width=800,height=700,location=0,menubar=0,scrollbars=1,status=1,resizable=0")
