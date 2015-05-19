@@ -131,7 +131,63 @@ function order_edit_goods(id){
 }
 
 function order_edit_option(id, option){
-
+    $.ajax({
+        url: '/manager/orderbody/editoption/'+id+'/' + option + '/',
+        cache: false,
+        success: function(data){
+            $( "#order-window-edit" ).html(data);
+            $(function() {
+                $( "#order-window-edit" ).dialog({
+                    resizable: false,
+                    height:280,
+                    width: 400,
+                    modal: true,
+                    closeOnEscape: false,
+                    title: "Редактирование",
+                    buttons: [
+                        {
+                        text: "Сохранить",
+                        click: function() {
+                            $.ajax({
+                                url: '/manager/orderbody/saveoption/' + id + '/?id=' + $('#orderbody_id').val() + '&count=' + $('#orderbody_count').val() + '&price=' + $('#orderbody_price').val() + '&option=' + option,
+                                cache: false,
+                                success: function (data) {
+                                    if (data != 'error') {
+                                        $.ajax({
+                                            url: '/manager/order/' + data + '/',
+                                            cache: false,
+                                            success: function (data) {
+                                                $("#order-window").html(data);
+                                            },
+                                            error: function(e, xhr){
+                                                msg_error("", "Ошибка обновления данных.");
+                                            }
+                                        });
+                                    } else {
+                                        msg_error("", "Ошибка сохранения данных.");
+                                    }
+                                },
+                                error: function(e, xhr){
+                                    msg_error("", "Ошибка передачи данных.");
+                                }
+                            });
+                            $( this ).dialog( "close" );
+                            }
+                        },
+                        {
+                        text: "Закрыть",
+                        click: function() {
+                            $( this ).dialog( "close" );
+                            }
+                        },
+                    ]
+                });
+            });
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка загрузки данных.");
+        }
+    });
 }
 
 load_orders('-id', 1);

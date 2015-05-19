@@ -1,0 +1,59 @@
+{% if orderbody %}
+    <input type="hidden" id="option" value="{{ option }}">
+    {% ifequal option "1" %}
+    <div>
+    Блюдо<br>
+    <select style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" id="orderbody_id">
+        {% for item in goods %}
+        <option value="{{ item.id }}"{% ifequal orderbody.option1.id item.id %} selected{% endifequal %}>{{ item.menu.name }}: {{ item.name }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div>
+    Количество<br>
+    <input type="text" style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" value="{{ orderbody.count_o1 }}" id="orderbody_count">
+    </div>
+    <div>
+    Цена<br>
+    <input type="text" style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" value="{{ orderbody.price_o1 }}" id="orderbody_price">
+    </div>
+    {% endifequal %}
+
+    {% ifequal option "2" %}
+    <div>
+    Блюдо<br>
+    <select style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" id="orderbody_id">
+        {% for item in goods %}
+        <option value="{{ item.id }}"{% ifequal orderbody.option2.id item.id %} selected{% endifequal %}>{{ item.menu.name }}: {{ item.name }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div>
+    Количество<br>
+    <input type="text" style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" value="{{ orderbody.count_o2 }}" id="orderbody_count">
+    </div>
+    <div>
+    Цена<br>
+    <input type="text" style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" value="{{ orderbody.price_o2 }}" id="orderbody_price">
+    </div>
+    {% endifequal %}
+
+    {% ifequal option "3" %}
+    <div>
+    Блюдо<br>
+    <select style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" id="orderbody_id">
+        {% for item in goods %}
+        <option value="{{ item.id }}"{% ifequal orderbody.option3.id item.id %} selected{% endifequal %}>{{ item.menu.name }}: {{ item.name }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div>
+    Количество<br>
+    <input type="text" style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" value="{{ orderbody.count_o3 }}" id="orderbody_count">
+    </div>
+    <div>
+    Цена<br>
+    <input type="text" style="width: 100%; padding: 5px; margin-bottom: 10px; margin-top: 5px;" value="{{ orderbody.price_o3 }}" id="orderbody_price">
+    </div>
+    {% endifequal %}
+{% endif %}

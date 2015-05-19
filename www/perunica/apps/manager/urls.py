@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'order/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.order_open', name='order'),
     url(r'orderbody/edit/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.orderbody_edit', name='orderbody'),
     url(r'orderbody/save/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.orderbody_save', name='orderbody'),
+    url(r'orderbody/editoption/(?P<id>[-\w]+)/(?P<option>[-\w]+)/$', 'perunica.apps.manager.views.orderbody_editoption', name='orderbody'),
+    url(r'orderbody/saveoption/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.orderbody_saveoption', name='orderbody'),
 ]

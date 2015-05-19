@@ -115,3 +115,41 @@ def orderbody_save(request, id):
         return HttpResponse('error')
 
 
+def orderbody_editoption(request, id, option):
+    try:
+        orderbody = OrderBody.objects.get(id=id)
+        goods = Goods.objects.filter(deleted=False)
+        context = {
+            'orderbody': orderbody,
+            'goods': goods,
+            'option': option
+        }
+    except:
+        context = {}
+        log.exception('Error orderbosy_edit')
+    return render(request, 'manager/orderbody_editoption.html', context)
+
+
+def orderbody_saveoption(request, id):
+    try:
+        orderbody = OrderBody.objects.get(id=id)
+        goods = Goods.objects.get(id=request.GET['id'])
+        if request.GET['option']=='1':
+            orderbody.option1 = goods
+            orderbody.count_o1 = request.GET['count']
+            orderbody.price_o1 = request.GET['price']
+        elif request.GET['option']=='2':
+            orderbody.option2 = goods
+            orderbody.count_o2 = request.GET['count']
+            orderbody.price_o2 = request.GET['price']
+        else:
+            orderbody.option3 = goods
+            orderbody.count_o3 = request.GET['count']
+            orderbody.price_o3 = request.GET['price']
+        orderbody.save()
+        return HttpResponse(orderbody.order.id)
+    except:
+        log.exception('Error orderbosy_edit')
+        return HttpResponse('error')
+
+
