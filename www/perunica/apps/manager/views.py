@@ -79,12 +79,28 @@ def order_open(request, id):
     try:
         order = Order.objects.get(id=id)
         context = {
-            'order': order
+            'order': order,
+            'print': request.GET['print']
         }
     except:
         context = {}
         log.exception('Error order_edit')
     return render(request, 'manager/order_edit.html', context)
+
+
+def order_setstatus(request, id):
+    try:
+        if int(request.GET['status']) < 4:
+            order = Order.objects.get(id=id)
+            history = OrderHistory.objects.create(
+                order = order,
+                status = int(request.GET['status']) + 1
+            )
+            history.save()
+        return HttpResponse('ok')
+    except:
+        log.exception('Error order_setstatus')
+        return HttpResponse('error')
 
 
 def orderbody_edit(request, id):

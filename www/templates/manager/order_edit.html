@@ -50,6 +50,14 @@
         </tr>
         {% endif %}
     {% endfor %}
+        <tr class="order-edit-row">
+            <td style="padding: 1px; background-color: #FFFFFF;" colspan="3">Итого</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ order.summ }}</td>
+        </tr>
 </table>
 </td></tr></table>
+{% ifequal print 'yes' %}
 <script>
+    window.print();
+</script>
+{% endifequal %}
