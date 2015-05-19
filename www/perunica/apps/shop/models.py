@@ -216,12 +216,14 @@ class OrderBody(models.Model):
 
 
 class OrderHistory(models.Model):
+    CANCEL_STATUS = 0
     NEW_STATUS = 1
     WORK_STATUS = 2
     SEND_STATUS = 3
     DONE_STATUS = 4
 
     STATUS_CHOICES = (
+        (CANCEL_STATUS, 'Отменен'),
         (NEW_STATUS, 'Новый'),
         (WORK_STATUS, 'Готовится'),
         (SEND_STATUS, 'Доставляется'),
