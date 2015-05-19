@@ -1,0 +1,20 @@
+    <table width="100%">
+        <tr>
+            <td style="text-align: center">Номер&nbsp;<a href="#" onclick="load_orders('-id')">&#8657;</a><a href="#" onclick="load_orders('id')">&#8659;</a></td>
+            <td style="text-align: center">Добавлен&nbsp;<a href="#" onclick="load_orders('-date')">&#8657;</a><a href="#" onclick="load_orders('date')">&#8659;</a></td>
+            <td style="text-align: center">Сумма&nbsp;</td>
+            <td style="text-align: center">Клиент&nbsp;<a href="#" onclick="load_orders('-fio')">&#8657;</a><a href="#" onclick="load_orders('fio')">&#8659;</a></td>
+            <td style="text-align: center">Телефон&nbsp;<a href="#" onclick="load_orders('-phone')">&#8657;</a><a href="#" onclick="load_orders('phone')">&#8659;</a></td>
+            <td style="text-align: center">Статус</td>
+        </tr>
+    {% for order in orders %}
+        <tr>
+            <td>{{ order.number }}</td>
+            <td style="text-align: center;">{{ order.added }}</td>
+            <td style="text-align: right;">{{ order.summ }}</td>
+            <td style="text-align: center;">{{ order.fio }}</td>
+            <td style="text-align: center;">{{ order.phone }}</td>
+            <td style="text-align: center;">{{ order.status }}</td>
+        </tr>
+    {% endfor %}
+    </table>

@@ -2,6 +2,7 @@ import logging
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Manager
+from perunica.apps.shop.models import Order
 import uuid
 
 log = logging.getLogger(__name__)
@@ -10,10 +11,10 @@ log = logging.getLogger(__name__)
 def index(request):
     try:
         context = {}
-        if 'Manager' not in request.session:
+        if 'manager' not in request.session:
             return HttpResponseRedirect('/manager/login/')
         else:
-            if request.session['Manager'] == None:
+            if 'login' not in request.session['manager']:
                 return HttpResponseRedirect('/manager/login/')
     except:
         context = {}
@@ -26,16 +27,42 @@ def login(request):
         if 'username' in request.POST and 'password' in request.POST:
             u = Manager.objects.filter(login=request.POST['username'], password=request.POST['password'], deleted=False)
             if len(u)>0:
-                request.session['Manager'] = {
+                request.session['manager'] = {
                     'name': u[0].name,
                     'login': u[0].login,
-                    'email': u[0].email
+                    'email': u[0].email,
                 }
-                HttpResponseRedirect('/manager/')
+                return HttpResponseRedirect('/manager/')
         context = {}
     except:
         context = {}
         log.exception('Error get_index')
     return render(request, 'manager/login.html', context)
+
+
+def logout(request):
+    try:
+        request.session['manager'] = None
+        return HttpResponseRedirect('/manager/login/')
+        context = {}
+    except:
+        context = {}
+        log.exception('Error get_index')
+    return render(request, 'manager/login.html', context)
+
+
+def order_table(request):
+    try:
+        desc = '-id'
+        if 'desc' in request.GET:
+            desc = request.GET['desc']
+        orders = Order.objects.all().order_by(desc)
+        context = {
+            'orders': orders
+        }
+    except:
+        context = {}
+        log.exception('Error get_index')
+    return render(request, 'manager/order_table.html', context)
 
 
