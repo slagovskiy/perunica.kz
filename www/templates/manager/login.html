@@ -19,7 +19,7 @@
     </div>
     <div id="content" style="padding: 10px;">
         <form action="/manager/login/" method="post" id="login-form">
-            <input type="hidden" name="csrfmiddlewaretoken" value="UsGOnQ35tTPdkKdFkzJVj5F0WcXqR9KH">
+            {% csrf_token %}
             <div style="padding-bottom: 10px;">
                 <div style="padding-bottom: 7px;">Username:</div><input id="username" name="username" type="text" style="width: 100%; padding: 5px;">
             </div>
