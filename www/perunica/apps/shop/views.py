@@ -2,7 +2,7 @@ import logging
 from django.shortcuts import render
 from perunica.apps.shop.models import Menu, SubMenu, Goods, GoodsGroup, GoodsLinkGroup, Order, OrderBody, OrderHistory
 from perunica.utils.models import Global
-from perunica.apps.manager.models import User as UserManager
+from perunica.apps.manager.models import Manager
 from perunica.settings import EMAIL_SUBJECT_PREFIX, DEFAULT_FROM_EMAIL
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader, Context
@@ -378,7 +378,7 @@ def basket_save(request):
                     option_i += 1
             order_body.save()
 
-        for u in UserManager.objects.all().filter(deleted=False):
+        for u in Manager.objects.all().filter(deleted=False):
             try:
                 c = Context({'order': order})
                 subject = u'Новый заказ #' + order.number() + ' на сумму ' + str(order.summ()) + ' тнг.'
