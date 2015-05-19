@@ -4,7 +4,7 @@ import uuid
 import os
 
 
-class User(models.Model):
+class Manager(models.Model):
     deleted = models.BooleanField(default=False, verbose_name=u'Deleted')
     login = models.CharField(max_length=255, default=u'', verbose_name=u'Login', unique=True)
     password = models.CharField(max_length=255, default=u'', verbose_name=u'Password')

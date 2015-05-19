@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.forms import SelectMultiple
 from django.db import models
-from .models import User
+from .models import Manager
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -11,4 +11,4 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
-admin.site.register(User, UserAdmin)
+admin.site.register(Manager, UserAdmin)
