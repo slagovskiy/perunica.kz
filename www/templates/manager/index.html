@@ -114,7 +114,7 @@ function order_edit_goods(id){
                                 success: function (data) {
                                     if (data != 'error') {
                                         $.ajax({
-                                            url: '/manager/order/' + data + '/',
+                                            url: '/manager/order/' + data + '/?print=no',
                                             cache: false,
                                             success: function (data) {
                                                 $("#order-window").html(data);
@@ -174,7 +174,7 @@ function order_edit_option(id, option){
                                 success: function (data) {
                                     if (data != 'error') {
                                         $.ajax({
-                                            url: '/manager/order/' + data + '/',
+                                            url: '/manager/order/' + data + '/?print=no',
                                             cache: false,
                                             success: function (data) {
                                                 $("#order-window").html(data);

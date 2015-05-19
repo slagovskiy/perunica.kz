@@ -78,9 +78,12 @@ def order_table(request):
 def order_open(request, id):
     try:
         order = Order.objects.get(id=id)
+        print = 'no'
+        if 'print' in request.GET:
+            print = request.GET['print']
         context = {
             'order': order,
-            'print': request.GET['print']
+            'print': print
         }
     except:
         context = {}
