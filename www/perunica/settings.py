@@ -18,6 +18,7 @@ INSTALLED_APPS = (
     'perunica.apps.shop',
     'perunica.apps.banner',
     'perunica.apps.manager',
+    'perunica.apps.feedback',
 )
 
 MIDDLEWARE_CLASSES = (
