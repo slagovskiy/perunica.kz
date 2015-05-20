@@ -10,9 +10,9 @@
             <div class="form">
                 <div class="f1">
                     <span>Имя *</span><input type="text" name="fio" id="feedback_fio" value="{{ request.session.fio }}" maxlength="250">
-                    <span style="padding-top:15px;">Телефон *</span><input type="text" name="phone" id="feedback_phone" value="{{ request.session.phone }}" maxlength="250">
+                    <span style="padding-top:15px;">Телефон</span><input type="text" name="phone" id="feedback_phone" value="{{ request.session.phone }}" maxlength="250">
                     <span style="padding-top:15px;">E-mail</span><input type="text" name="email" id="feedback_email" value="{{ request.session.email }}" maxlength="250">
-                    <span style="padding-top:15px;">Введите символы с картинки </span><input type="text" name="capcha" id="feedback_capcha" value="" maxlength="10">
+                    <span style="padding-top:15px;">Введите код с картинки: </span><table style="width: 238px"><tr><td><img src="/capcha/"></td><td><input type="text" name="capcha" id="feedback_capcha" value="" maxlength="10" style="width: 100%"></td></tr></table>
                 </div>
                 <div class="f3">
                     <span>Отзыв *</span><textarea maxlength="1024" name="comment" id="feedback_comment" style="margin-bottom:30px;"></textarea>
