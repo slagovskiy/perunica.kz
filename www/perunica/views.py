@@ -36,7 +36,10 @@ def capcha(request):
 
 def capcha_check(request, code):
     data = '0'
-    if request.session['CAPCHA_CODE'] == str(code).upper():
-        return HttpResponse('1', content_type="application/javascript")#data = '1'
+    if 'CAPCHA_CODE' in request.session:
+        if request.session['CAPCHA_CODE'] == str(code).upper():
+            return HttpResponse('1', content_type="application/javascript")
+        else:
+            return HttpResponse('0', content_type="application/javascript")
     else:
-        return HttpResponse('0', content_type="application/javascript")#data = '0'
+        return HttpResponse('0', content_type="application/javascript")
