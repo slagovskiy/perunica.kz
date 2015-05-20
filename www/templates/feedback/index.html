@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="rsection_t">
+    <div class="cart">
+        <h1>
+            <b>ОСТАВЬТЕ СВОЙ ОТЗЫВ</b>
+        </h1>
+        <div class="txt">
+            <div class="form">
+                <div class="f1">
+                    <span>Имя *</span><input type="text" name="fio" id="feedback_fio" value="{{ request.session.fio }}">
+                    <span style="padding-top:15px;">Телефон *</span><input type="text" name="phone" id="feedback_phone" value="{{ request.session.phone }}">
+                    <span style="padding-top:15px;">E-mail</span><input type="text" name="email" id="feedback_email" value="{{ request.session.email }}">
+                </div>
+                <div class="f3">
+                    <span>Отзыв *</span><textarea name="address" id="feedback_text" style="margin-bottom:30px;"></textarea>
+                </div>
+                <div class="clear"></div>
+                <button type="button" class="butt" onclick="load_basket_confirm()">Отправить</button>
+                <div style="float: right; margin-top: 26px; display: none;" id="feedback_loader"><img src="{% static 'img/ajax-loader.gif' %}"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+{% endblock %}
+

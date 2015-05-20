@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', 'perunica.views.index', name='home'),
     url(r'^shop/', include('perunica.apps.shop.urls')),
     url(r'^manager/', include('perunica.apps.manager.urls')),
+    url(r'^feedback/', include('perunica.apps.feedback.urls')),
 
     url(r'^pages/', include('django.contrib.flatpages.urls')),
 
