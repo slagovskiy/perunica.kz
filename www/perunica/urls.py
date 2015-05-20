@@ -11,6 +11,9 @@ urlpatterns = [
     url(r'^manager/', include('perunica.apps.manager.urls')),
     url(r'^feedback/', include('perunica.apps.feedback.urls')),
 
+    url(r'^capcha/$', 'perunica.views.capcha'),
+    url(r'^capcha_check/(?P<code>[-\w]+)/$', 'perunica.views.capcha_check'),
+
     url(r'^pages/', include('django.contrib.flatpages.urls')),
 
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
