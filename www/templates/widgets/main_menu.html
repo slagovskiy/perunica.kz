@@ -1,3 +1,4 @@
+{% load static %}
         <div class="lsection">
             <div class="menu">
                 {% for item in main_menu %}
@@ -7,6 +8,17 @@
                     </span>
                 </div>
                 {% endfor %}
+            <hr>
+                <div style="background:url('{% static 'img/news.png' %}') no-repeat;">
+                    <span>
+                        <a id="" href="/news/">Новости</a>
+                    </span>
+                </div>
+                <div style="background:url('{% static 'img/comment.png' %}') no-repeat;">
+                    <span>
+                        <a id="" href="/feedback/">Отзывы</a>
+                    </span>
+                </div>
             </div>
             <div class="clear"></div>
         </div>
