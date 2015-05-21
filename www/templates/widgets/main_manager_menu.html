@@ -1,0 +1,3 @@
+{% if request.session.manager %}
+    <div class="rsection_m">Менеджер: {{ request.session.manager.name }} | <a href="/manager/">Управление заказами</a> | <a href="/manager/feedback/">Управление отзывами</a> | <a href="/manager/logout/">Выйти</a></div>
+{% endif %}
