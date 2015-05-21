@@ -27,7 +27,28 @@
 
     <div class="clear"></div>
     <div id="feedback_ok" style="text-align: center; display: none;"><h1>Спасибо за Ваш отзыв!</h1></div>
-</div>
+    <div style="padding-top: 20px; font-size: 14px;">
+        {% for item in fb %}
+            <div style="font-weight: bold; padding-bottom: 10px;">{{ item.name }} <span style="font-weight: normal; font-size: 10px;">{{ item.date | date:"Y/m/d H:i" }}</span></div>
+            <div style="margin-left: 50px;">{{ item.comment }}</div>
+            <hr style="width: 70%; border: 1px solid #CCCCCC; margin-top: 30px; margin-bottom: 30px;">
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if fb.has_previous %}
+                <a href="/feedback/?page={{ fb.previous_page_number }}" style="cursor: pointer">&#8656;</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ fb.number }} из {{ fb.paginator.num_pages }}.
+            </span>
+
+            {% if fb.has_next %}
+                <a href="/feedback/?page={{ fb.next_page_number }}" style="cursor: pointer">&#8658;</a>
+            {% endif %}
+        </span>
+    </div></div>
 
 <script type="text/javascript">
 function send_feedback(){
