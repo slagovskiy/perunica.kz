@@ -2,6 +2,7 @@
 
 {% block content %}
     {% if goods %}
+        {% if menu.banner %}<div class="cimage" style="padding-bottom: 20px;"><img src="{{ menu.banner.url }}"></div>{% endif %}
         <div class="items" data-show="1">
         {% for item in goods %}
             {% include 'shop/item.html' %}
