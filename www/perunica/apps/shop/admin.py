@@ -6,8 +6,8 @@ from .models import Menu, SubMenu, Unit, Goods, GoodsGroup, GoodsLinkGroup, Orde
 
 class MenuAdmin(admin.ModelAdmin):
     ordering = ['sort', 'name']
-    list_display = ['slug', 'name', 'sort', 'admin_image_list', 'deleted']
-    readonly_fields = ['admin_image']
+    list_display = ['slug', 'name', 'sort', 'admin_image_list', 'admin_banner_list', 'deleted']
+    readonly_fields = ['admin_image', 'admin_banner']
     list_filter = ['slug']
     search_fields = ['slug']
 
