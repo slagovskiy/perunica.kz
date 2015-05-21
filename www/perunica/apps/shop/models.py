@@ -18,7 +18,7 @@ class Menu(models.Model):
             filename = '{}.{}'.format(str(uuid.uuid1()), ext)
         return os.path.join('menu_icons', filename)
     icon = models.ImageField(upload_to=upload_to, null=True, verbose_name=u'Icon')
-    banner = models.ImageField(upload_to=upload_to, null=True, verbose_name=u'Banner')
+    banner = models.ImageField(upload_to=upload_to, null=True, blank=True, verbose_name=u'Banner')
 
     def __str__(self):
         return '[%s] %s' % (self.sort, self.name)
@@ -39,14 +39,14 @@ class Menu(models.Model):
             return ''
 
     def admin_banner_list(self):
-        if self.icon:
-            return '<img style="width: 122px; height: 24px;" src="%s"/>' % self.icon.url
+        if self.banner:
+            return '<img style="width: 122px; height: 24px;" src="%s"/>' % self.banner.url
         else:
             return ''
 
     def admin_banner(self):
-        if self.icon:
-            return '<img src="%s"/>' % self.icon.url
+        if self.banner:
+            return '<img src="%s"/>' % self.banner.url
         else:
             return ''
 
