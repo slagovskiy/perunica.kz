@@ -18,7 +18,17 @@
             <td class="feedback_comment" colspan="5" style="text-align: left;">{{ item.comment }}</td>
         </tr>
         <tr>
-            <td class="feedback_action" colspan="5" style="text-align: left;">{% if not item.deleted %}{% if item.allowed %}<button class="butt">скрыть</button>{% else %}<button class="butt">опубликовать</button>{% endif %} <button class="butt">удалить</button>{% else %}<button class="butt">восстановить</button>{% endif %}</td>
+            <td class="feedback_action" colspan="5" style="text-align: left;">
+                {% if not item.deleted %}
+                    {% if item.allowed %}
+                        <button class="butt" onclick="fb_hide({{ item.id }})">скрыть</button>
+                    {% else %}
+                        <button class="butt" onclick="fb_allow({{ item.id }})">опубликовать</button>
+                    {% endif %}
+                    <button class="butt" onclick="fb_delete({{ item.id }})">удалить</button>
+                {% else %}
+                    <button class="butt" onclick="fb_restore({{ item.id }})">восстановить</button>
+                {% endif %}</td>
         </tr>
     {% endfor %}
     </table>

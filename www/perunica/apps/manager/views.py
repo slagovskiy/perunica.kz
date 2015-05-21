@@ -21,6 +21,7 @@ def index(request):
     except:
         context = {}
         log.exception('Error get_index')
+        return HttpResponseRedirect('/manager/login/')
     return render(request, 'manager/index.html', context)
 
 
@@ -184,13 +185,14 @@ def feedback(request):
     except:
         context = {}
         log.exception('Error get_index')
+        return HttpResponseRedirect('/manager/login/')
     return render(request, 'manager/feedback.html', context)
 
 
 def feedback_table(request):
     try:
         fb = Feedback.objects.all().order_by('-date')
-        paginator = Paginator(fb, 3)
+        paginator = Paginator(fb, 25)
         tmp = paginator.page(1)
         try:
             tmp = paginator.page(request.GET['page'])

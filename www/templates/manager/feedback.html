@@ -26,7 +26,7 @@ function load_fb(page){
     });
 }
 
-function fb_delete(id, page){
+function fb_delete(id){
     $.ajax({
         url: '/manager/feedback/delete/' + id + '/',
         cache: false,
@@ -41,7 +41,7 @@ function fb_delete(id, page){
     });
 }
 
-function fb_restore(id, page){
+function fb_restore(id){
     $.ajax({
         url: '/manager/feedback/restore/' + id + '/',
         cache: false,
@@ -56,7 +56,7 @@ function fb_restore(id, page){
     });
 }
 
-function fb_allow(id, page){
+function fb_allow(id){
     $.ajax({
         url: '/manager/feedback/allow/' + id + '/',
         cache: false,
@@ -71,7 +71,7 @@ function fb_allow(id, page){
     });
 }
 
-function fb_hide(id, page){
+function fb_hide(id){
     $.ajax({
         url: '/manager/feedback/hide/' + id + '/',
         cache: false,
