@@ -34,6 +34,7 @@
             <hr style="width: 70%; border: 1px solid #CCCCCC; margin-top: 30px; margin-bottom: 30px;">
         {% endfor %}
     </div>
+{% ifnotequal fb.paginator.num_pages 1 %}
     <div class="pagination">
         <span class="step-links">
             {% if fb.has_previous %}
@@ -48,7 +49,9 @@
                 <a href="/feedback/?page={{ fb.next_page_number }}" style="cursor: pointer">&#8658;</a>
             {% endif %}
         </span>
-    </div></div>
+    </div>
+{% endifnotequal %}
+</div>
 
 <script type="text/javascript">
 function send_feedback(){
