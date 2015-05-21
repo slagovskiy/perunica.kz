@@ -26,6 +26,66 @@ function load_fb(page){
     });
 }
 
+function fb_delete(id, page){
+    $.ajax({
+        url: '/manager/feedback/delete/' + id + '/',
+        cache: false,
+        success: function(data){
+            if (data=='ok'){
+                load_fb($('#page').val())
+            }
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка удаления отзыва.");
+        }
+    });
+}
+
+function fb_restore(id, page){
+    $.ajax({
+        url: '/manager/feedback/restore/' + id + '/',
+        cache: false,
+        success: function(data){
+            if (data=='ok'){
+                load_fb($('#page').val())
+            }
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка восстановления отзыва.");
+        }
+    });
+}
+
+function fb_allow(id, page){
+    $.ajax({
+        url: '/manager/feedback/allow/' + id + '/',
+        cache: false,
+        success: function(data){
+            if (data=='ok'){
+                load_fb($('#page').val())
+            }
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка публикации отзыва.");
+        }
+    });
+}
+
+function fb_hide(id, page){
+    $.ajax({
+        url: '/manager/feedback/hide/' + id + '/',
+        cache: false,
+        success: function(data){
+            if (data=='ok'){
+                load_fb($('#page').val())
+            }
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка скрытия отзыва.");
+        }
+    });
+}
+
 load_fb(1);
 </script>
 <style>
