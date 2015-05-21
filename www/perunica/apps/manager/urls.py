@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'orderbody/save/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.orderbody_save', name='orderbody'),
     url(r'orderbody/editoption/(?P<id>[-\w]+)/(?P<option>[-\w]+)/$', 'perunica.apps.manager.views.orderbody_editoption', name='orderbody'),
     url(r'orderbody/saveoption/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.orderbody_saveoption', name='orderbody'),
+    url(r'feedback/$', 'perunica.apps.manager.views.feedback', name='feedback'),
+    url(r'feedbacks/$', 'perunica.apps.manager.views.feedback_table', name='feedback'),
 ]

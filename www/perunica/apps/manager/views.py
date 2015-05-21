@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Manager
 from perunica.apps.shop.models import Order, OrderBody, OrderHistory, Goods
+from perunica.apps.feedback.models import Feedback
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import uuid
 
@@ -172,3 +173,34 @@ def orderbody_saveoption(request, id):
         return HttpResponse('error')
 
 
+def feedback(request):
+    try:
+        context = {}
+        if 'manager' not in request.session:
+            return HttpResponseRedirect('/manager/login/')
+        else:
+            if 'login' not in request.session['manager']:
+                return HttpResponseRedirect('/manager/login/')
+    except:
+        context = {}
+        log.exception('Error get_index')
+    return render(request, 'manager/feedback.html', context)
+
+
+def feedback_table(request):
+    try:
+        fb = Feedback.objects.all().order_by('-date')
+        paginator = Paginator(fb, 3)
+        tmp = paginator.page(1)
+        try:
+            tmp = paginator.page(request.GET['page'])
+            log.warn(request.GET['page'])
+        except:
+            pass
+        context = {
+            'fb': tmp
+        }
+    except:
+        context = {}
+        log.exception('Error order_table')
+    return render(request, 'manager/feedback_table.html', context)

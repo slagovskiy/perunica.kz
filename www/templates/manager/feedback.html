@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="rsection_t">
+<input type="hidden" value="1" id="page">
+<input type="hidden" value="-id" id="desc">
+<div id="fb-table">
+</div>
+<div id="fb-window" style="display: none;"></div>
+<div id="fb-window-edit" style="display: none;"></div>
+</div>
+
+
+<script type="text/javascript">
+function load_fb(page){
+    $.ajax({
+        url: '/manager/feedbacks/?page=' + page,
+        cache: false,
+        success: function(data){
+            $('#fb-table').html(data);
+            $('#page').val(page);
+        },
+        error: function(e, xhr){
+            msg_error("", "Ошибка загрузки отзывов.");
+        }
+    });
+}
+
+load_fb(1);
+</script>
+<style>
+#fb-table td{
+    padding: 3px;
+}
+#fb-table td a{
+    text-decoration: none;
+}
+#fb-table tr{
+    font-size: 14px;
+}
+#fb-table td.feedback_comment{
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+#fb-table td.feedback_action{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #CCCCCC;
+}
+#fb-table td.feedback_row{
+    font-size: 14px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#fb-table tr:hover{
+}
+.pagination{
+    padding-top: 20px;
+    font-size: 14px;
+}
+.pagination a{
+    text-decoration: none;
+    font-size: 20px;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: none !important;
+}
+</style>
+{% endblock %}

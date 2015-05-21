@@ -1,0 +1,40 @@
+    <table width="100%">
+        <tr>
+            <td style="text-align: center">Добавлен</td>
+            <td style="text-align: center">Клиент</td>
+            <td style="text-align: center">Телефон</td>
+            <td style="text-align: center">Email</td>
+            <td style="text-align: center">Статус</td>
+        </tr>
+    {% for item in fb %}
+        <tr>
+            <td class="feedback_row" style="text-align: center;">{{ item.date | date:"Y/m/d H:i:s" }}</td>
+            <td class="feedback_row" style="text-align: center;">{{ item.name }}</td>
+            <td class="feedback_row" style="text-align: center;">{{ item.phone }}</td>
+            <td class="feedback_row" style="text-align: center;">{{ item.email }}</td>
+            <td class="feedback_row" style="text-align: center;">{% if item.deleted %}Удален{% elif item.allowed %}Опубликован{% else %}Скрыт{% endif %}</td>
+        </tr>
+        <tr>
+            <td class="feedback_comment" colspan="5" style="text-align: left;">{{ item.comment }}</td>
+        </tr>
+        <tr>
+            <td class="feedback_action" colspan="5" style="text-align: left;">{% if not item.deleted %}{% if item.allowed %}<button class="butt">скрыть</button>{% else %}<button class="butt">опубликовать</button>{% endif %} <button class="butt">удалить</button>{% else %}<button class="butt">восстановить</button>{% endif %}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if fb.has_previous %}
+                <a onclick="load_fb({{ fb.previous_page_number }})" style="cursor: pointer">&#8656;</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ fb.number }} из {{ fb.paginator.num_pages }}.
+            </span>
+
+            {% if fb.has_next %}
+                <a onclick="load_fb({{ fb.next_page_number }})" style="cursor: pointer">&#8658;</a>
+            {% endif %}
+        </span>
+    </div>
