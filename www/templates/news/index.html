@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="rsection_t">
+{% for item in news %}
+    <div><h2 style="font-weight: bold; padding-bottom: 10px;">{{ item.title }} <span style="font-weight: normal; font-size: 10px;">{{ item.date | date:"Y/m/d H:i" }}</span></h2></div>
+    <div style="margin-left: 50px;">{{ item.message | safe }}</div>
+    <hr style="width: 70%; border: 1px solid #CCCCCC; margin-top: 30px; margin-bottom: 30px;">
+{% endfor %}
+</div>
+{% ifnotequal news.paginator.num_pages 1 %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if news.has_previous %}
+                <a href="/news/?page={{ news.previous_page_number }}" style="cursor: pointer">&#8656;</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ news.number }} из {{ news.paginator.num_pages }}.
+            </span>
+
+            {% if fb.has_next %}
+                <a href="/news/?page={{ news.next_page_number }}" style="cursor: pointer">&#8658;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endifnotequal %}
+{% endblock %}

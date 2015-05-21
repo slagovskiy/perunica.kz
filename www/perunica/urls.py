@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^shop/', include('perunica.apps.shop.urls')),
     url(r'^manager/', include('perunica.apps.manager.urls')),
     url(r'^feedback/', include('perunica.apps.feedback.urls')),
+    url(r'^news/', include('perunica.apps.news.urls')),
 
     url(r'^capcha/$', 'perunica.views.capcha'),
     url(r'^capcha_check/(?P<code>[-\w]+)/$', 'perunica.views.capcha_check'),
