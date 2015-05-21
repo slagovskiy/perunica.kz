@@ -233,22 +233,56 @@ function cart_add_good(id){
 }
 
 function cart_confirm(){
-    $('#basket_confirm').hide();
-    $('#basket_loader').show();
     $.ajax({
-        url: '/shop/basket/save/',
+        url: '/shop/license/',
         cache: false,
         success: function(data){
-            if(data=='ok')
-            {
-                update_basket();
-                location.href = '/shop/basket/ok/';
-            }
+            $( "#license" ).html(data);
+            $(function() {
+                $( "#license" ).dialog({
+                    resizable: false,
+                    height:400,
+                    width: 600,
+                    modal: true,
+                    closeOnEscape: false,
+                    title: "Соглашение",
+                    buttons: [
+                        {
+                            text: "Согласен",
+                            click: function () {
+                                $( this ).dialog( "close" );
+                                $('#basket_confirm').hide();
+                                $('#basket_loader').show();
+                                $.ajax({
+                                    url: '/shop/basket/save/',
+                                    cache: false,
+                                    success: function (data) {
+                                        if (data == 'ok') {
+                                            update_basket();
+                                            location.href = '/shop/basket/ok/';
+                                        }
+                                    },
+                                    error: function (e, xhr) {
+                                        msg_error("", "Ошибка сохранения корзины.");
+                                    }
+                                });
+                            }
+                        },
+                        {
+                        text: "Закрыть",
+                        click: function() {
+                            $( this ).dialog( "close" );
+                            }
+                        },
+                    ]
+                });
+            });
         },
         error: function(e, xhr){
-            msg_error("", "Ошибка сохранения корзины.");
+            msg_error("", "Ошибка загрузки данных.");
         }
     });
+
 }
 
 

@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'basket/save/$', 'perunica.apps.shop.views.basket_save', name='menu'),
     url(r'basket/ok/$', 'perunica.apps.shop.views.basket_ok', name='menu'),
     url(r'basket/$', 'perunica.apps.shop.views.get_basket', name='menu'),
+    url(r'license/$', 'perunica.apps.shop.views.get_license', name='license'),
 ]

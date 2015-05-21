@@ -9,6 +9,7 @@ from django.template import loader, Context
 from django.contrib.auth.models import User, AnonymousUser
 from django.http import HttpResponse
 from django.db import transaction
+from django.contrib.flatpages.models import FlatPage
 import uuid
 
 log = logging.getLogger(__name__)
@@ -449,3 +450,19 @@ def get_option(request, id):
         context = {}
         log.exception('Error get_option')
     return render(request, 'shop/option.html', context)
+
+def get_license(request):
+    page_text = ''
+    try:
+        page = FlatPage.objects.filter(title='LICENSE')
+        if len(page) == 0:
+            page = FlatPage.objects.create(
+                title='LICENSE',
+                content='LICENSE TEXT'
+            )
+        else:
+            page = page[0]
+        page_text = page.content
+    except:
+        log.exception('Error get license')
+    return HttpResponse(page_text)
