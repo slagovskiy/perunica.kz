@@ -202,5 +202,50 @@ def feedback_table(request):
         }
     except:
         context = {}
-        log.exception('Error order_table')
+        log.exception('Error feedback_table')
     return render(request, 'manager/feedback_table.html', context)
+
+
+def feedback_delete(request, id):
+    try:
+        fb = Feedback.objects.get(id=id)
+        fb.deleted = True
+        fb.save()
+        return HttpResponse('ok')
+    except:
+        log.exception('Error delete feedback')
+        return HttpResponse('error')
+
+
+def feedback_restore(request, id):
+    try:
+        fb = Feedback.objects.get(id=id)
+        fb.deleted = False
+        fb.save()
+        return HttpResponse('ok')
+    except:
+        log.exception('Error restore feedback')
+        return HttpResponse('error')
+
+
+def feedback_allow(request, id):
+    try:
+        fb = Feedback.objects.get(id=id)
+        fb.allowed = True
+        fb.save()
+        return HttpResponse('ok')
+    except:
+        log.exception('Error allow feedback')
+        return HttpResponse('error')
+
+
+def feedback_hide(request, id):
+    try:
+        fb = Feedback.objects.get(id=id)
+        fb.allowed = False
+        fb.save()
+        return HttpResponse('ok')
+    except:
+        log.exception('Error hide feedback')
+        return HttpResponse('error')
+

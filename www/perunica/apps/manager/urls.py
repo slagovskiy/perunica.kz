@@ -15,4 +15,8 @@ urlpatterns = [
     url(r'orderbody/saveoption/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.orderbody_saveoption', name='orderbody'),
     url(r'feedback/$', 'perunica.apps.manager.views.feedback', name='feedback'),
     url(r'feedbacks/$', 'perunica.apps.manager.views.feedback_table', name='feedback'),
+    url(r'feedback/delete/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.feedback_delete', name='feedback'),
+    url(r'feedback/restore/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.feedback_restore', name='feedback'),
+    url(r'feedback/allow/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.feedback_allow', name='feedback'),
+    url(r'feedback/hide/(?P<id>[-\w]+)/$', 'perunica.apps.manager.views.feedback_hide', name='feedback'),
 ]
