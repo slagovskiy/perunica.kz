@@ -52,9 +52,10 @@
 
         {% widget_main_menu %}
 
+        {% include 'widgets/counters.html' %}
+
         {% include 'widgets/main_manager_menu.html' %}
 
-        {% include 'widgets/counters.html' %}
 
         {% if menu %}
             {% widget_sub_menu menu %}
