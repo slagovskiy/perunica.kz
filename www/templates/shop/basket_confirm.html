@@ -11,6 +11,7 @@
             <div>Ваше имя: {{ request.session.fio }}</div>
             <div>Телефон: {{ request.session.phone }}</div>
             <div>Доставка будет осуществлена по адресу: {{ request.session.address }}</div>
+            <div style="float: left; margin-top: 20px; padding-left: 380px;"><input type="checkbox" id="basket_allow" value="1"><a style="cursor: pointer;" onclick="cart_license()">Я согласен с условиями</a></div>
             <button type="button" class="butt" onclick="cart_confirm()" id="basket_confirm">Отправить заказ</button>
             <div style="float: right; margin-top: 26px; display: none;" id="basket_loader"><img src="{% static 'img/ajax-loader.gif' %}"></div>
         </div>

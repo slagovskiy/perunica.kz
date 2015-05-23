@@ -233,6 +233,31 @@ function cart_add_good(id){
 }
 
 function cart_confirm(){
+	if($('#basket_allow').is(':checked'))
+	{
+        $('#basket_confirm').hide();
+        $('#basket_loader').show();
+        $.ajax({
+            url: '/shop/basket/save/',
+            cache: false,
+            success: function (data) {
+                if (data == 'ok') {
+                    update_basket();
+                    location.href = '/shop/basket/ok/';
+                }
+            },
+            error: function (e, xhr) {
+                msg_error("", "Ошибка сохранения корзины.");
+            }
+        });
+	} else {
+		msg_error("", "Для оформления заказа необходимо согласиться с условиями.");
+	}
+
+}
+
+
+function cart_license(){
     $.ajax({
         url: '/shop/license/',
         cache: false,
@@ -247,27 +272,6 @@ function cart_confirm(){
                     closeOnEscape: false,
                     title: "Соглашение",
                     buttons: [
-                        {
-                            text: "Согласен",
-                            click: function () {
-                                $( this ).dialog( "close" );
-                                $('#basket_confirm').hide();
-                                $('#basket_loader').show();
-                                $.ajax({
-                                    url: '/shop/basket/save/',
-                                    cache: false,
-                                    success: function (data) {
-                                        if (data == 'ok') {
-                                            update_basket();
-                                            location.href = '/shop/basket/ok/';
-                                        }
-                                    },
-                                    error: function (e, xhr) {
-                                        msg_error("", "Ошибка сохранения корзины.");
-                                    }
-                                });
-                            }
-                        },
                         {
                         text: "Закрыть",
                         click: function() {
