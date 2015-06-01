@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'CyrillicOld';
+	src: url('/static/fonts/old.ttf')  format('truetype');
+}
+
 * {font-family:Tahoma;}
 html {
 	height:100%;
