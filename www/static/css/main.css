@@ -1,6 +1,12 @@
 @font-face {
 	font-family: 'CyrillicOld';
-	src: url('/static/fonts/old.ttf')  format('truetype');
+	src: url("/static/fonts/old.eot");
+	src: url("/static/fonts/old.eot#iefix") format("embedded-opentype"),
+	url("/static/fonts/old.woff") format("woff"),
+	url("/static/fonts/old.ttf") format("truetype"),
+	url("/static/fonts/old.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
 }
 
 * {font-family:Tahoma;}
