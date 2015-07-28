@@ -10,18 +10,27 @@ log = logging.getLogger(__name__)
 
 def index(request):
     try:
-        page = FlatPage.objects.filter(title='INDEX')
-        if len(page) == 0:
-            page = FlatPage.objects.create(
-                title='INDEX',
-                content='FIRST PAGE'
+        page_top = FlatPage.objects.filter(title='INDEX_TOP')
+        if len(page_top) == 0:
+            page_top = FlatPage.objects.create(
+                title='INDEX_TOP',
+                content='FIRST PAGE TOP'
             )
         else:
-            page = page[0]
+            page_top = page_top[0]
+        page_bottom = FlatPage.objects.filter(title='INDEX_BOTTOM')
+        if len(page_bottom) == 0:
+            page_bottom = FlatPage.objects.create(
+                title='INDEX_BOTTOM',
+                content='FIRST PAGE BOTTOM'
+            )
+        else:
+            page_bottom = page_bottom[0]
         goods = Goods.objects.all().filter(is_on_first=True, deleted=False)
         context = {
             'goods': goods,
-            'content': page.content
+            'page_top': page_top.content,
+            'page_bottom': page_bottom.content
         }
     except:
         context = {}
