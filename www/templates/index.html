@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="rsection_t" style="padding-bottom: 30px;">{{ page_top | safe }}</div>
+    {% if page_top %}<div class="rsection_t" style="padding-bottom: 30px;">{{ page_top | safe }}</div>{% endif %}
 
     {% if goods %}
         <div class="items" data-show="1">
