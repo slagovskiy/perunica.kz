@@ -199,10 +199,12 @@ class Order(models.Model):
         return self.date.strftime('%Y/%m/%d %H:%M:%S')
         
     def payment_name(self):
-        if self.payment == self.CASHE_PAYMENT:
+        if self.payment == 1:
             return 'Наличные'
-        if self.payment == self.CARD_PAYMENT:
+        if self.payment == 2:
             return 'Карта'
+        else:
+            return '--'
 
     def summ(self):
         s = 0
