@@ -6,6 +6,7 @@
             <td style="text-align: center">Клиент&nbsp;<a href="#" onclick="load_orders('-fio')">&#8657;</a><a href="#" onclick="load_orders('fio')">&#8659;</a></td>
             <td style="text-align: center">Телефон&nbsp;<a href="#" onclick="load_orders('-phone')">&#8657;</a><a href="#" onclick="load_orders('phone')">&#8659;</a></td>
             <td style="text-align: center">Статус</td>
+            <td style="text-align: center">Оплата</td>
         </tr>
     {% for order in orders %}
         <tr onclick="order_open({{ order.id }})">
@@ -15,6 +16,7 @@
             <td style="text-align: center;">{{ order.fio }}</td>
             <td style="text-align: center;">{{ order.phone }}</td>
             <td style="text-align: center;">{{ order.status }}</td>
+            <td style="text-align: center;">{{ order.payment_name }}</td>
         </tr>
     {% endfor %}
     </table>
