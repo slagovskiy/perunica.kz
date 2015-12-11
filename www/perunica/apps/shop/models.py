@@ -201,10 +201,10 @@ class Order(models.Model):
     def payment_name(self):
         if self.payment == 1:
             return 'Наличные'
-        if self.payment == 2:
+        elif self.payment == 2:
             return 'Карта'
         else:
-            return '--'
+            return self.payment
 
     def summ(self):
         s = 0

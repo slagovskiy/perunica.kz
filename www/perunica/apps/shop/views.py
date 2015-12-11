@@ -378,7 +378,6 @@ def basket_save(request):
                     order_body.count_o3 = _item['count']
                     option_i += 1
             order_body.save()
-
         for u in Manager.objects.all().filter(deleted=False):
             try:
                 c = Context({'order': order})
