@@ -3,9 +3,6 @@
 *.pyc
 *.pot
 *~
-~$*
-/tmp/*
-/www/tmp/*
 __pycache__
 
 # Project specific #
@@ -30,13 +27,9 @@ logs/*.log.*
 *.sqlite
 *.sqlite3
 *.db
+www/media
 
 # IDE #
 .idea
 projectFilesBackup
 *.iml
-
-# Media #
-#########
-media/*
-www/media/*
