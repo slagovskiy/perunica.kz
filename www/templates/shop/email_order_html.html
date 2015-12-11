@@ -77,7 +77,7 @@
         </tr>
         <tr>
             <td colspan="3" style="background-color: #FFFFFF; padding: 5px;">Оплата</td>
-            <td style="background-color: #FFFFFF; padding: 5px;">{% ifequal order.payment 1 %}Наличные{% endifequal %}{% ifequal order.payment 2 %}Карта{% endifequal %}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ order.payment_name }}</td>
         </tr>
     </table>
     </td></tr></table>
