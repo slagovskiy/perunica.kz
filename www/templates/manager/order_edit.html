@@ -54,6 +54,10 @@
             <td style="padding: 1px; background-color: #FFFFFF;" colspan="3">Итого</td>
             <td style="padding: 1px; background-color: #FFFFFF;">{{ order.summ }}</td>
         </tr>
+        <tr class="order-edit-row">
+            <td style="padding: 1px; background-color: #FFFFFF;" colspan="3">Оплата</td>
+            <td style="padding: 1px; background-color: #FFFFFF;">{{ order.payment_name }}</td>
+        </tr>
 </table>
 </td></tr></table>
 {% ifequal print 'yes' %}
