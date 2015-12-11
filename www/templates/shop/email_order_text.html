@@ -18,6 +18,7 @@ Email: {{ order.email }}
         {% if item.option3 %}{{ item.option3.menu.name }}: {{ item.option3.name }} | {{ item.count_o3 }} | {{ item.price_o3 }} тнг. | {{ item.count_o3 | fmul:item.price_o3 }} тнг.{% endif %}
     {% endfor %}
 Итого:           {{ order.summ }} тнг.
+Оплата:          {% if order.payment = 1 %}Наличные{% endif %}{% if order.payment = 2 %}Карта{% endif %}
 
 Открыть заказ: {{ order.get_manager_url }}
 {% endif %}
