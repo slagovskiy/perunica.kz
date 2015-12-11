@@ -197,6 +197,12 @@ class Order(models.Model):
 
     def added(self):
         return self.date.strftime('%Y/%m/%d %H:%M:%S')
+        
+    def payment_name(self)::
+        if self.payment == self.CASHE_PAYMENT:
+            return 'Наличные'
+        if self.payment == self.CARD_PAYMENT:
+            return 'Карта'
 
     def summ(self):
         s = 0
