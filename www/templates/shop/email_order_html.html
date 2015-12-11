@@ -77,7 +77,7 @@
         </tr>
         <tr>
             <td colspan="3" style="background-color: #FFFFFF; padding: 5px;">Оплата</td>
-            <td style="background-color: #FFFFFF; padding: 5px;">{% if order.payment = 1 %}Наличные{% endif %}{% if order.payment = 2 %}Карта{% endif %}</td>
+            <td style="background-color: #FFFFFF; padding: 5px;">{{ order.payment }}{% if order.payment = 1 %}Наличные{% endif %}{% if order.payment = 2 %}Карта{% endif %}</td>
         </tr>
     </table>
     </td></tr></table>
