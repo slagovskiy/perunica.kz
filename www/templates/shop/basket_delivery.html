@@ -8,7 +8,7 @@
                     <span>Имя *</span><input type="text" name="fio" id="basket_fio" value="{{ request.session.fio }}">
                     <span style="padding-top:15px;">Телефон *</span><input type="text" name="phone" id="basket_phone" value="{{ request.session.phone }}">
                     <span style="padding-top:15px;">E-mail</span><input type="text" name="email" id="basket_email" value="{{ request.session.email }}">
-                    <span  style="padding-top:15px;">Способ оплаты&nbsp;<select name="payment" id="basket_payment"><option value="1">Наличными</option><!--<option value="2">Картой</option>--></select></span>
+                    <span  style="padding-top:15px;">Способ оплаты&nbsp;<select name="payment" id="basket_payment"><option value="1">Наличными</option><option value="2">Картой</option></select></span>
                 </div>
                 <div class="f3">
                     <span>Адрес доставки *</span><textarea name="address" id="basket_address" style="margin-bottom:30px;">{{ request.session.address }}</textarea>
