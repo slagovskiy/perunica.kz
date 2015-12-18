@@ -1,1 +1,1 @@
-"c:\Program Files\WinRAR\Rar.exe" u -p -m5 files/localdata.arc www/db www/media
+"c:\Program Files\WinRAR\Rar.exe" u -p -m5 files/localdata.arc www/db www/media www/perunica/settings_local.py
