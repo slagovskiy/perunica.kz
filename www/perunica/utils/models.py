@@ -14,6 +14,19 @@ class Global(models.Model):
         return self.meta_title
 
 
+class SU(models.Model):
+    active = models.BooleanField(unique=True, default=True)
+    name = models.CharField(max_length=255, default='')
+    freezing = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'SU'
+        verbose_name_plural = 'SU'
+
+
 class Image(models.Model):
     name = models.CharField(max_length=256, default='', verbose_name=u'Image name')
     def upload_to(instance, filename):
