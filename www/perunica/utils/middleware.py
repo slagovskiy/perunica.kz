@@ -1,4 +1,4 @@
-from .models import Global
+from .models import Global, SU
 
 
 class GlobalsMiddleware:
@@ -13,6 +13,12 @@ class GlobalsMiddleware:
         request.session['meta_description'] = g.meta_description
         request.session['meta_keywords'] = g.meta_keywords
 
+        su = SU.objects.filter(active=True)
+        if len(su) > 0:
+            su = su[0]
+        else:
+            su = SU.objects.create()
+        request.session['freezing'] = su.freezing
 
     def process_response(self, request, response):
         return response
