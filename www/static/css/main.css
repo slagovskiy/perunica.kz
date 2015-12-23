@@ -40,6 +40,25 @@ button {
 	border:0;
 }
 
+.freezing{
+	background-image: url("http://pcwallart.com/images/window-frost-wallpaper-4.jpg");
+	-moz-background-size: 100%;
+	-webkit-background-size: 100%;
+	-o-background-size: 100%;
+	background-size: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0.5;
+	text-align: center;
+	padding-top: 210px;
+	font-family: "CyrillicOld";
+	font-size: 150px;
+}
+
 /* main wrap */
 .main_wrap {
   min-height:100%;

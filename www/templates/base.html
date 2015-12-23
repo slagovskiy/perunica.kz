@@ -19,6 +19,7 @@
         <script type="text/javascript" src="{% static 'js/ui/jquery-ui.min.js' %}"></script>
 	</head>
     <body>
+        {% if request.session.freezing %}<div class="freezing">Не оплачено</div>{% endif %}
         <div class="main_wrap">
         <div class="main">
         <table class="header">
