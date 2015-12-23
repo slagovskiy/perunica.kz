@@ -41,7 +41,7 @@ button {
 }
 
 .freezing{
-	background-image: url("http://pcwallart.com/images/window-frost-wallpaper-4.jpg");
+	background-image: url("/static/img/freezing.jpg");
 	-moz-background-size: 100%;
 	-webkit-background-size: 100%;
 	-o-background-size: 100%;
